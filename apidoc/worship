@@ -1,0 +1,98 @@
+/**
+ * @api {get} /worship/:worship_id Get Worship
+ * @apiName GetWorship
+ * @apiGroup Worship
+ * @apiParam {Number} worship_id worship id
+ * @apiSuccess {Object} worship object
+ * @apiSuccess {Number} worship.worship_id worship id
+ * @apiSuccess {Date} worship.date worship date (UTC)
+ * @apiSuccess {String} worship.type type of worship
+ * @apiSuccess {String} worship.remark remark of worship
+ * @apiSuccessExample {json} Success
+ *    HTTP/1.1 200 OK
+ *    {
+ *      "worship_id": 1,
+ *      "date": "2016-02-10",
+ *      "type": "morning",
+ *      "remark": ""
+ *    }
+ */
+
+/**
+ * @api {get} /worships Get Worships
+ * @apiName GetWorships
+ * @apiGroup Worship
+ * @apiSuccess {Object[]} worships object
+ * @apiSuccess {Number} worship.worship_id worship id
+ * @apiSuccess {Date} worship.date worship date (UTC)
+ * @apiSuccess {String} worship.type type of worship
+ * @apiSuccess {String} worship.remark remark of worship
+ * @apiSuccessExample {json} Success
+ *    HTTP/1.1 200 OK
+ *    [{
+ *      "worship_id": 1,
+ *      "date": "2016-02-10",
+ *      "type": "morning",
+ *      "remark": ""
+ *    },{
+ *      "worship_id": 1,
+ *      "date": "2016-02-10",
+ *      "type": "beforenoon",
+ *      "remark": ""
+ *    }]
+ */
+
+/**
+ * @api {post} /worship Create Worship
+ * @apiName CreateWorship
+ * @apiGroup Worship
+ * @apiParam {Date} date worship date (UTC)
+ * @apiParam {String} type type of worship
+ * @apiParam {String} remark remark of worship
+ * @apiSuccess {Object} response object
+ * @apiSuccess {Boolean} response.success action result
+ * @apiSuccess {String} response.message action result message
+ * @apiSuccess {Number} response.worship_id worship id
+ * @apiSuccessExample {json} Success
+ *    HTTP/1.1 200 OK
+ *    {
+ *      "success": true,
+ *      "message": ""
+ *      "worship_id": 3
+ *    }
+ */
+
+/**
+ * @api {put} /worship/:worship_id Update Worship
+ * @apiName UpdateWorship
+ * @apiGroup Worship
+ * @apiParam {Number} worship_id worship id
+ * @apiParam {Date} date worship date (UTC)
+ * @apiParam {String} type type of worship
+ * @apiParam {String} remark remark of worship
+ * @apiSuccess {Object} response object
+ * @apiSuccess {Boolean} response.success action result
+ * @apiSuccess {String} response.message action result message
+ * @apiSuccessExample {json} Success
+ *    HTTP/1.1 200 OK
+ *    {
+ *      "success": true,
+ *      "message": ""
+ *    }
+ */
+
+/**
+ * @api {delete} /worship/:worship_id Delete Worship
+ * @apiName DeleteWorship
+ * @apiGroup Worship
+ * @apiParam {Number} worship_id worship id
+ * @apiSuccess {Object} response object
+ * @apiSuccess {Boolean} response.success action result
+ * @apiSuccess {String} response.message action result message
+ * @apiSuccessExample {json} Success
+ *    HTTP/1.1 200 OK
+ *    {
+ *      "success": true,
+ *      "message": ""
+ *    }
+ */
