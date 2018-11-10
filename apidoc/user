@@ -1,0 +1,98 @@
+/**
+ * @api {get} /user/:user_id Get User
+ * @apiName GetUser
+ * @apiGroup User
+ * @apiParam {Number} user_id user id
+ * @apiSuccess {Object} user object
+ * @apiSuccess {Number} user.user_id user id
+ * @apiSuccess {String} user.name_en user english name
+ * @apiSuccess {String} user['name_zh-hk'] user chinese name
+ * @apiSuccess {Date} user.created_date user created date (UTC)
+ * @apiSuccessExample {json} Success
+ *    HTTP/1.1 200 OK
+ *    {
+ *      "user_id": 1,
+ *      "name_en": "Chan Tai Man",
+ *      "name_zh-hk": "Chan Tai Man",
+ *      "create_date": "2016-02-10 15:46:51"
+ *    }
+ */
+
+/**
+ * @api {get} /users Get Users
+ * @apiName GetUsers
+ * @apiGroup User
+ * @apiSuccess {Object[]} users object
+ * @apiSuccess {Number} user.user_id user id
+ * @apiSuccess {String} user.name_en user english name
+ * @apiSuccess {String} user['name_zh-hk'] user chinese name
+ * @apiSuccess {Date} user.created_date user created date (UTC)
+ * @apiSuccessExample {json} Success
+ *    HTTP/1.1 200 OK
+ *    [{
+ *      "user_id": 1,
+ *      "name_en": "Chan Tai Man",
+ *      "name_zh-hk": "Chan Tai Man",
+ *      "create_date": "2016-02-10 15:46:51"
+ *    },{
+ *      "user_id": 2,
+ *      "name_en": "Lau Tai Man",
+ *      "name_zh-hk": "Lau Tai Man",
+ *      "create_date": "2018-02-10 15:46:51"
+ *    }]
+ */
+
+/**
+ * @api {post} /user Create User
+ * @apiName CreateUser
+ * @apiGroup User
+ * @apiParam {String} name_en user english name
+ * @apiParam {String} name_zh-hk user chinese name
+ * @apiSuccess {Object} response object
+ * @apiSuccess {Boolean} response.success action result
+ * @apiSuccess {String} response.message action result message
+ * @apiSuccess {Number} response.user_id user id
+ * @apiSuccess {Date} response.created_date user created date (UTC)
+ * @apiSuccessExample {json} Success
+ *    HTTP/1.1 200 OK
+ *    {
+ *      "success": true,
+ *      "message": ""
+ *      "user_id": 3,
+ *      "create_date": "2018-02-10 15:46:51"
+ *    }
+ */
+
+/**
+ * @api {put} /user/:user_id Update User
+ * @apiName UpdateUser
+ * @apiGroup User
+ * @apiParam {Number} user_id user id
+ * @apiParam {String} name_en user english name
+ * @apiParam {String} name_zh-hk user chinese name
+ * @apiSuccess {Object} response object
+ * @apiSuccess {Boolean} response.success action result
+ * @apiSuccess {String} response.message action result message
+ * @apiSuccessExample {json} Success
+ *    HTTP/1.1 200 OK
+ *    {
+ *      "success": true,
+ *      "message": ""
+ *    }
+ */
+
+/**
+ * @api {delete} /user/:user_id Delete User
+ * @apiName DeleteUser
+ * @apiGroup User
+ * @apiParam {Number} user_id user id
+ * @apiSuccess {Object} response object
+ * @apiSuccess {Boolean} response.success action result
+ * @apiSuccess {String} response.message action result message
+ * @apiSuccessExample {json} Success
+ *    HTTP/1.1 200 OK
+ *    {
+ *      "success": true,
+ *      "message": ""
+ *    }
+ */
