@@ -1,0 +1,105 @@
+/**
+ * @api {get} /group/:group_id Get Group
+ * @apiName GetGroup
+ * @apiGroup Group
+ * @apiParam {Number} group_id group id
+ * @apiSuccess {Object} group object
+ * @apiSuccess {Number} group.group_id group id
+ * @apiSuccess {String} group.type group type
+ * @apiSuccess {String} group.name_en group english name
+ * @apiSuccess {String} group['name_zh-hk'] group chinese name
+ * @apiSuccess {Date} group.created_date group created date (UTC)
+ * @apiSuccessExample {json} Success
+ *    HTTP/1.1 200 OK
+ *    {
+ *      "group_id": 1,
+ *      "type": "fellowship",
+ *      "name_en": "Daniel",
+ *      "name_zh-hk": "Daniel",
+ *      "created_date": "2016-02-10 15:46:51"
+ *    }
+ */
+
+/**
+ * @api {get} /groups Get Groups
+ * @apiName GetGroups
+ * @apiGroup Group
+ * @apiSuccess {Object[]} groups object
+ * @apiSuccess {Number} group.group_id group id
+ * @apiSuccess {String} group.type group type
+ * @apiSuccess {String} group.name_en group english name
+ * @apiSuccess {String} group['name_zh-hk'] group chinese name
+ * @apiSuccess {Date} group.created_date group created date (UTC)
+ * @apiSuccessExample {json} Success
+ *    HTTP/1.1 200 OK
+ *    [{
+ *      "group_id": 1,
+ *      "type": "fellowship",
+ *      "name_en": "Daniel",
+ *      "name_zh-hk": "Daniel",
+ *      "created_date": "2016-02-10 15:46:51"
+ *    },{
+ *      "group_id": 2,
+ *      "type": "fellowship",
+ *      "name_en": "Peter",
+ *      "name_zh-hk": "Peter",
+ *      "created_date": "2018-02-10 15:46:51"
+ *    }]
+ */
+
+/**
+ * @api {post} /group Create Group
+ * @apiName CreateGroup
+ * @apiGroup Group
+ * @apiParam {String} type group type
+ * @apiParam {String} name_en group english name
+ * @apiParam {String} name_zh-hk group chinese name
+ * @apiSuccess {Object} response object
+ * @apiSuccess {Boolean} response.success action result
+ * @apiSuccess {String} response.message action result message
+ * @apiSuccess {Number} response.group_id group id
+ * @apiSuccess {Date} response.created_date group created date (UTC)
+ * @apiSuccessExample {json} Success
+ *    HTTP/1.1 200 OK
+ *    {
+ *      "success": true,
+ *      "message": ""
+ *      "group_id": 3,
+ *      "created_date": "2018-02-10 15:46:51"
+ *    }
+ */
+
+/**
+ * @api {put} /group/:group_id Update Group
+ * @apiName UpdateGroup
+ * @apiGroup Group
+ * @apiParam {Number} group_id group id
+ * @apiParam {String} type group type
+ * @apiParam {String} name_en group english name
+ * @apiParam {String} name_zh-hk group chinese name
+ * @apiSuccess {Object} response object
+ * @apiSuccess {Boolean} response.success action result
+ * @apiSuccess {String} response.message action result message
+ * @apiSuccessExample {json} Success
+ *    HTTP/1.1 200 OK
+ *    {
+ *      "success": true,
+ *      "message": ""
+ *    }
+ */
+
+/**
+ * @api {delete} /group/:group_id Delete Group
+ * @apiName DeleteGroup
+ * @apiGroup Group
+ * @apiParam {Number} group_id group id
+ * @apiSuccess {Object} response object
+ * @apiSuccess {Boolean} response.success action result
+ * @apiSuccess {String} response.message action result message
+ * @apiSuccessExample {json} Success
+ *    HTTP/1.1 200 OK
+ *    {
+ *      "success": true,
+ *      "message": ""
+ *    }
+ */
