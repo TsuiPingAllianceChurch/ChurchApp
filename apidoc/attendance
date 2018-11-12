@@ -1,0 +1,60 @@
+/**
+ * @api {get} /attendances Get Attendances
+ * @apiName GetAttendances
+ * @apiGroup Attendance
+ * @apiSuccess {Object[]} attendances object
+ * @apiSuccess {Number} attendance.attendance_id attendance id
+ * @apiSuccess {Number} attendance.user_id user id
+ * @apiSuccess {String} attendance.worship_id worship id
+ * @apiSuccess {Date} attendance.created_date attendance created date (UTC)
+ * @apiSuccessExample {json} Success
+ *    HTTP/1.1 200 OK
+ *    [{
+ *      "attendance_id": 1,
+ *      "user_id": 2,
+ *      "worship_id": 3,
+ *      "create_date": "2016-02-10 15:46:51"
+ *    },{
+ *      "attendance_id": 2,
+ *      "user_id": 3,
+ *      "worship_id": 4,
+ *      "create_date": "2018-02-10 15:46:51"
+ *    }]
+ */
+
+/**
+ * @api {post} /attendance Create Attendance
+ * @apiName CreateAttendance
+ * @apiGroup Attendance
+ * @apiParam {Number} user_id user id
+ * @apiParam {String} worship_id worship id
+ * @apiSuccess {Object} response object
+ * @apiSuccess {Boolean} response.success action result
+ * @apiSuccess {String} response.message action result message
+ * @apiSuccess {Number} response.attendance_id attendance id
+ * @apiSuccess {Date} response.created_date attendance created date (UTC)
+ * @apiSuccessExample {json} Success
+ *    HTTP/1.1 200 OK
+ *    {
+ *      "success": true,
+ *      "message": ""
+ *      "attendance_id": 3,
+ *      "create_date": "2018-02-10 15:46:51"
+ *    }
+ */
+
+/**
+ * @api {delete} /attendance/:attendance_id Delete Attendance
+ * @apiName DeleteAttendance
+ * @apiGroup Attendance
+ * @apiParam {Number} attendance_id attendance id
+ * @apiSuccess {Object} response object
+ * @apiSuccess {Boolean} response.success action result
+ * @apiSuccess {String} response.message action result message
+ * @apiSuccessExample {json} Success
+ *    HTTP/1.1 200 OK
+ *    {
+ *      "success": true,
+ *      "message": ""
+ *    }
+ */

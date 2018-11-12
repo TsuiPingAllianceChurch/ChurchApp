@@ -1,0 +1,62 @@
+/**
+ * @api {get} /group/:group_id/members Get Group Members
+ * @apiName GetGroupMember
+ * @apiGroup Group
+ * @apiParam {Number} group_id group id
+ * @apiSuccess {Object[]} users object
+ * @apiSuccess {Number} user.user_id user id
+ * @apiSuccess {String} user.name_en user english name
+ * @apiSuccess {String} user['name_zh-hk'] user chinese name
+ * @apiSuccess {Date} user.created_date user created date (UTC)
+
+ * @apiSuccessExample {json} Success
+ *    HTTP/1.1 200 OK
+ *    [{
+ *      "user_id": 1,
+ *      "name_en": "Chan Tai Man",
+ *      "name_zh-hk": "Chan Tai Man",
+ *      "create_date": "2016-02-10 15:46:51"
+ *    },{
+ *      "user_id": 2,
+ *      "name_en": "Lau Tai Man",
+ *      "name_zh-hk": "Lau Tai Man",
+ *      "create_date": "2018-02-10 15:46:51"
+ *    }]
+
+ */
+
+/**
+ * @api {post} /group/:group_id/member Create Group Member
+ * @apiName CreateGroupMember
+ * @apiGroup Group
+ * @apiParam {String} group_id group id
+ * @apiParam {String} user_id user id
+ * @apiSuccess {Object} response object
+ * @apiSuccess {Boolean} response.success action result
+ * @apiSuccess {String} response.message action result message
+ * @apiSuccess {Date} response.created_date group created date (UTC)
+ * @apiSuccessExample {json} Success
+ *    HTTP/1.1 200 OK
+ *    {
+ *      "success": true,
+ *      "message": ""
+ *      "created_date": "2018-02-10 15:46:51"
+ *    }
+ */
+
+/**
+ * @api {delete} /group/:group_id/member/:user_id Delete Group
+ * @apiName DeleteGroupMember
+ * @apiGroup Group
+ * @apiParam {String} group_id group id
+ * @apiParam {String} user_id user id
+ * @apiSuccess {Object} response object
+ * @apiSuccess {Boolean} response.success action result
+ * @apiSuccess {String} response.message action result message
+ * @apiSuccessExample {json} Success
+ *    HTTP/1.1 200 OK
+ *    {
+ *      "success": true,
+ *      "message": ""
+ *    }
+ */
