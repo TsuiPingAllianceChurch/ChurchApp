@@ -1,6 +1,13 @@
-# admin
+## Docker Setup
 
-> A Vue.js project
+```bash
+Run with docker
+# prepare the container with dependencies installed
+docker build .
+
+# run the admin app
+docker run -it -p 8080:80 --rm --name church-admin-app church-admin
+```
 
 ## Build Setup
 

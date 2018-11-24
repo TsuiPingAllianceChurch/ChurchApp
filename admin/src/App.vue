@@ -1,27 +1,12 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    {{ info }}
     <router-view/>
   </div>
 </template>
 
 <script>
-import { getUsers } from '../api/user'
 export default {
-  name: 'App',
-  data () {
-    return {
-      info: null
-    }
-  },
-  mounted () {
-    const users = getUsers().then((result) => {
-      console.warn('result', result)
-      this.info = result
-    })
-    console.warn('users', users)
-  }
+  name: 'App'
 }
 </script>
 
