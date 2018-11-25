@@ -27,13 +27,11 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchUsers: 'fetchUsers',
-      fetchWorship: 'fetchWorship'
+      fetchUsers: 'fetchUsers'
     })
   },
   mounted () {
     this.fetchUsers()
-    this.fetchWorship()
   }
 }
 </script>
