@@ -1,15 +1,15 @@
 import Vue from 'vue'
 import _map from 'lodash/map'
-import { getUsers } from '../../api/user'
+import { getWorship } from '../../api/worship'
 
 export default {
   state: {},
   actions: {
-    fetchUsers: ({commit}) => {
+    fetchWorship: ({commit}) => {
       return new Promise((resolve, reject) => {
-        return getUsers().then((result) => {
+        return getWorship().then((result) => {
           _map(result, (item, key) => {
-            commit('setUser', {key, item})
+            commit('setWorship', {key, item})
           })
           return resolve(result)
         }).catch((err) => {
@@ -19,12 +19,12 @@ export default {
     }
   },
   getters: {
-    getUsers: (state) => {
+    getWorship: (state) => {
       return state
     }
   },
   mutations: {
-    setUser: (state, {key, item}) => {
+    setWorship: (state, {key, item}) => {
       Vue.set(state, key, item)
     }
   }
