@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 export default {
   name: 'Home',
   data () {
@@ -27,14 +27,6 @@ export default {
     ...mapGetters({
       getWorship: 'getWorship'
     })
-  },
-  methods: {
-    ...mapActions({
-      fetchWorship: 'fetchWorship'
-    })
-  },
-  mounted () {
-    this.fetchWorship()
   }
 }
 </script>

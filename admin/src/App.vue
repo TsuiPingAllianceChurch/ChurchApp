@@ -5,8 +5,25 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
-  name: 'App'
+  name: 'App',
+  methods: {
+    ...mapActions({
+      fetchUsers: 'fetchUsers',
+      fetchWorship: 'fetchWorship',
+      fetchGroups: 'fetchGroups',
+      fetchMembers: 'fetchMembers',
+      fetchAttendances: 'fetchAttendances'
+    })
+  },
+  mounted () {
+    this.fetchUsers()
+    this.fetchWorship()
+    this.fetchGroups()
+    this.fetchMembers()
+    this.fetchAttendances()
+  }
 }
 </script>
 
