@@ -12,7 +12,6 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import _map from 'lodash/map'
 export default {
   name: 'Home',
   data () {
