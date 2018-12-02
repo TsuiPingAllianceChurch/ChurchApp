@@ -1,3 +1,7 @@
+DROP SCHEMA IF EXISTS tpac_db;
+CREATE SCHEMA tpac_db;
+USE tpac_db;
+
 CREATE TABLE IF NOT EXISTS User(
     user_id INT AUTO_INCREMENT,
     name_en VARCHAR(255) NULL,

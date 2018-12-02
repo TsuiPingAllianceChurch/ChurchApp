@@ -1,0 +1,51 @@
+version: "3.2"
+services:
+  php:
+    build: 
+      context: './php/'
+      args:
+       PHP_VERSION: ${PHP_VERSION}
+    networks:
+      - backend
+    volumes:
+      - ./api/:/var/www/html/
+    container_name: tpac_api
+  apache:
+    build:
+      context: './apache/'
+      args:
+       APACHE_VERSION: ${APACHE_VERSION}
+    depends_on:
+      - php 
+      - tpac_db 
+    networks:
+      - frontend
+      - backend
+    ports:
+      - "8001:80"
+    volumes:
+      - ./api/:/var/www/html/
+    container_name: tpac_apache
+  tpac_admin:
+    build:
+      context: './admin/'
+    networks:
+      - frontend
+    ports:
+      - "8002:8080"
+    container_name: tpac_admin
+  tpac_db:
+    image: mysql:${MYSQL_VERSION:-latest}
+    networks:
+      - backend
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpassword
+    container_name: tpac_db 
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d
+      - dbdata:/var/lib/mysql 
+networks:
+  frontend:
+  backend:
+volumes:
+  dbdata:

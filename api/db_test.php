@@ -1,7 +1,7 @@
 <?php
-$servername = "localhost";
-$username = "tpac";
-$password = "Zpf3sKYQns";
+$servername = "tpac_db";
+$username = "root";
+$password = "rootpassword";
 $dbname = "tpac_db";
 
 // Create connection
