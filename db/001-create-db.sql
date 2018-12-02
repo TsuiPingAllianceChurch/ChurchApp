@@ -2,7 +2,7 @@ DROP SCHEMA IF EXISTS tpac_db;
 CREATE SCHEMA tpac_db;
 USE tpac_db;
 
-CREATE TABLE IF NOT EXISTS User(
+CREATE TABLE IF NOT EXISTS User (
     user_id INT AUTO_INCREMENT,
     name_en VARCHAR(255) NULL,
     `name_zh-hk` VARCHAR(255) NOT NULL,
@@ -10,12 +10,19 @@ CREATE TABLE IF NOT EXISTS User(
     PRIMARY KEY (user_id)
 )  ENGINE=INNODB;
 
-CREATE TABLE IF NOT EXISTS Fellowship (
-    fellowship_id INT AUTO_INCREMENT,
-    user_id INT NOT NULL,
-    name VARCHAR(255) NOT NULL,
+CREATE TABLE IF NOT EXISTS `Group` (
+    group_id INT AUTO_INCREMENT,
+    type VARCHAR(255) NOT NULL,
+    name_en VARCHAR(255) NOT NULL,
+    `name_zh-hk` VARCHAR(255) NOT NULL,
     created_date DATETIME NOT NULL,
-    PRIMARY KEY (fellowship_id)
+    PRIMARY KEY (group_id)
+)  ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS Group_Member (
+    group_id INT NOT NULL,
+    user_id INT NOT NULL,
+    created_date DATETIME NOT NULL
 )  ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS Attendance (
@@ -26,14 +33,17 @@ CREATE TABLE IF NOT EXISTS Attendance (
 
 CREATE TABLE IF NOT EXISTS Worship (
     worship_id INT AUTO_INCREMENT,
-    data DATE NOT NULL,
+    date DATE NOT NULL,
     type VARCHAR(255) NOT NULL,
     remark TEXT NOT NULL,
     created_date DATETIME NOT NULL,
     PRIMARY KEY (worship_id)
 )  ENGINE=INNODB;
 
-ALTER TABLE Fellowship ADD FOREIGN KEY (user_id)
+ALTER TABLE `Group_Member` ADD FOREIGN KEY (group_id)
+REFERENCES `Group`(group_id);
+
+ALTER TABLE `Group_Member` ADD FOREIGN KEY (user_id)
 REFERENCES User(user_id);
 
 ALTER TABLE Attendance ADD FOREIGN KEY (user_id)
