@@ -1,9 +1,8 @@
-
 import axios from 'axios'
 
-export const getWorship = async () => {
+export const getAttendances = async () => {
   return new Promise((resolve, reject) => {
-    axios.get('https://api.myjson.com/bins/1cbqz2').then(response => {
+    axios.get('https://api.myjson.com/bins/13pkdu').then(response => {
       return resolve(response.data)
     })
   })

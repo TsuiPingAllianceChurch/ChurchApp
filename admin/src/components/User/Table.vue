@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 export default {
   name: 'Home',
   data () {
@@ -24,14 +24,6 @@ export default {
     ...mapGetters({
       getUsers: 'getUsers'
     })
-  },
-  methods: {
-    ...mapActions({
-      fetchUsers: 'fetchUsers'
-    })
-  },
-  mounted () {
-    this.fetchUsers()
   }
 }
 </script>
