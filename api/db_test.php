@@ -18,8 +18,6 @@ if (!$result) {
     echo 'Invalid query: ' . $conn->error;
 }
 
-echo "TEST123 <br>";
-
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
