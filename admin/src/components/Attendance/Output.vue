@@ -1,4 +1,5 @@
 <template>
+  <div>
     <table class="table">
     <thead>
         <tr>
@@ -9,24 +10,39 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-        <th scope="row">1</th>
-        <td>陳大文</td>
-        <td>所羅門團</td>
-        <td>2018-12-03 14:43:01</td>
-        </tr>
-        <tr>
-        <th scope="row">2</th>
-        <td>游大文</td>
-        <td>所羅門團</td>
-        <td>2018-12-03 14:43:01</td>
-        </tr>
-        <tr>
-        <th scope="row">3</th>
-        <td>王大文</td>
-        <td>所羅門團</td>
-        <td>2018-12-03 14:43:01</td>
-        </tr>
+      <tr v-for="(item, key) in attendanceList" :key="key">
+        <th scope="row">{{ key }} </th>
+        <td>{{ item.userName }}</td>
+        <td>{{ item.groupName }}</td>
+        <td>{{ item.date }}</td>
+      </tr>
     </tbody>
     </table>
+  </div>
 </template>
+<script>
+import { mapGetters } from 'vuex'
+import _get from 'lodash/get'
+import _map from 'lodash/map'
+export default {
+  name: 'output',
+  computed: {
+    attendanceList () {
+      let result = []
+      _map(this.getAttendances, attendance => {
+        result.push({
+          userName: _get(this.getUser(attendance.user_id), 'name_zh-hk', ''),
+          groupName: _get(this.getGroup(attendance.user_id), 'name_zh-hk', ''),
+          date: attendance.create_date
+        })
+      })
+      return result
+    },
+    ...mapGetters({
+      getGroup: 'getGroup',
+      getUser: 'getUser',
+      getAttendances: 'getAttendances'
+    })
+  }
+}
+</script>

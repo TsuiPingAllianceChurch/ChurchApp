@@ -3,8 +3,7 @@
         <div class="row">
             <div class="col-3">
                 <select class="form-control">
-                    <option>早堂</option>
-                    <option>午堂</option>
+                    <option v-for="(worship, key) in getWorship" :value="worship.worship_id" :key="key">{{ worship.type }}</option>
                 </select>
             </div>
         </div>
@@ -17,3 +16,14 @@
         </div>
     </form>
 </template>
+<script>
+import { mapGetters } from 'vuex'
+export default {
+  name: 'auto-input',
+  computed: {
+    ...mapGetters({
+      getWorship: 'getWorship'
+    })
+  }
+}
+</script>

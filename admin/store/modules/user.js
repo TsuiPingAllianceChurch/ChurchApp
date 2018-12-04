@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import _map from 'lodash/map'
+import _find from 'lodash/find'
 import { getUsers } from '../../api/user'
 
 export default {
@@ -21,6 +22,9 @@ export default {
   getters: {
     getUsers: (state) => {
       return state
+    },
+    getUser: (state) => (userId) => {
+      return _find(state, {user_id: userId})
     }
   },
   mutations: {

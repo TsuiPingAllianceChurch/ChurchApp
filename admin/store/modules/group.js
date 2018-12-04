@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import _map from 'lodash/map'
+import _find from 'lodash/find'
 import { getGroups } from '../../api/group'
 
 export default {
@@ -21,6 +22,10 @@ export default {
   getters: {
     getGroups: (state) => {
       return state
+    },
+    getGroup: (state) => (groupId) => {
+      console.warn('get group', groupId)
+      return _find(state, {group_id: groupId})
     }
   },
   mutations: {
