@@ -25,7 +25,7 @@ import { mapGetters } from 'vuex'
 import _get from 'lodash/get'
 import _map from 'lodash/map'
 export default {
-  name: 'output',
+  name: 'attendanceList',
   computed: {
     attendanceList () {
       let result = []
