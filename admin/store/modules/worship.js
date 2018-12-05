@@ -8,7 +8,7 @@ export default {
     fetchWorship: ({commit}) => {
       return new Promise((resolve, reject) => {
         return getWorship().then((result) => {
-          _map(result, (item, key) => {
+          _map(result.Worship, (item, key) => {
             commit('setWorship', {key, item})
           })
           return resolve(result)

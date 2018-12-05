@@ -9,7 +9,7 @@ export default {
     fetchGroups: ({commit}) => {
       return new Promise((resolve, reject) => {
         return getGroups().then((result) => {
-          _map(result, (item, key) => {
+          _map(result.Group, (item, key) => {
             commit('setGroup', {key, item})
           })
           return resolve(result)

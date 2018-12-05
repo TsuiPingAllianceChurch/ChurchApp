@@ -8,7 +8,7 @@ export default {
     fetchAttendances: ({commit}) => {
       return new Promise((resolve, reject) => {
         return getAttendances().then((result) => {
-          _map(result, (item, key) => {
+          _map(result.Attendance, (item, key) => {
             commit('setAttendances', {key, item})
           })
           return resolve(result)

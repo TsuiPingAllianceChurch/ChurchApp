@@ -44,6 +44,7 @@ services:
     volumes:
       - ./db:/docker-entrypoint-initdb.d
       - dbdata:/var/lib/mysql 
+    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8_unicode_ci']
 networks:
   frontend:
   backend:

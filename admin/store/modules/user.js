@@ -9,7 +9,7 @@ export default {
     fetchUsers: ({commit}) => {
       return new Promise((resolve, reject) => {
         return getUsers().then((result) => {
-          _map(result, (item, key) => {
+          _map(result.User, (item, key) => {
             commit('setUser', {key, item})
           })
           return resolve(result)

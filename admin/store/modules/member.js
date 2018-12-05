@@ -8,7 +8,7 @@ export default {
     fetchMembers: ({commit}) => {
       return new Promise((resolve, reject) => {
         return getMembers().then((result) => {
-          _map(result, (item, key) => {
+          _map(result.Group_Member, (item, key) => {
             commit('setMember', {key, item})
           })
           return resolve(result)
