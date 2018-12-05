@@ -1,4 +1,4 @@
-<h1>Hello Tsui Ping Alliance Church !</h1>
+<h1>Hello Tsui Ping Alliance Church !!</h1>
 <h4>Attempting MySQL connection from php...</h4>
 <?php
 $host = 'tpac_db';
