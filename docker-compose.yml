@@ -42,9 +42,9 @@ services:
       - MYSQL_ROOT_PASSWORD=rootpassword
     container_name: tpac_db 
     volumes:
+      - mysql.cnf:/etc/mysql/conf.d/mysql.cnf
       - ./db:/docker-entrypoint-initdb.d
-      - dbdata:/var/lib/mysql 
-    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8_unicode_ci']
+      - dbdata:/var/lib/mysql
 networks:
   frontend:
   backend:
