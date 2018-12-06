@@ -22,7 +22,11 @@ export default {
     this.fetchWorship()
     this.fetchGroups()
     this.fetchMembers()
-    this.fetchAttendances()
+    const self = this
+    setInterval(() => {
+      console.log('refresh for attendances list...')
+      self.fetchAttendances()
+    }, 5000)
   }
 }
 </script>
