@@ -39,7 +39,8 @@ export default {
       var match
       while ((match = pat.exec(this.attendanceStr)) !== null) {
         // perform decode and submit to backend
-        console.log('submit ' + match[0] + ' for ' + this.worshiptype)
+        var search = match[0].slice(1, -1)
+        console.log('submit ' + search + ' for ' + this.worshiptype)
         this.attendanceStr = this.attendanceStr.replace(match[0], '')
       }
     }
