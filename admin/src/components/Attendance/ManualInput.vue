@@ -3,7 +3,8 @@
         <div class="form-group row">
             <label for="worship_type" class="col-sm-2 col-form-label">崇拜</label>
             <div class="col-sm-4">
-                <select class="form-control" id="worship_type">
+                <select class="form-control" v-model="selectedWorship">
+                    <option value="default">-- 請選擇 --</option>
                     <option v-for="(worship, key) in getWorship" :value="worship.worship_id" :key="key">{{ worship.type }}</option>
                 </select>
             </div>
@@ -29,17 +30,19 @@
             </div>
         </div>
 
-        <button type="button" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-primary" @click="onSubmit" >Submit</button>
     </form>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import _map from 'lodash/map'
 import _indexOf from 'lodash/indexOf'
+import { format } from 'date-fns'
 export default {
   name: 'manual-input',
   data () {
     return {
+      selectedWorship: 'default',
       selectedGroup: 'default',
       selectedUser: 'default'
     }
@@ -64,7 +67,18 @@ export default {
     },
     resetGroup () {
       this.selectedUser = 'default'
-    }
+    },
+    onSubmit () {
+      const data = {
+        user_id: this.selectedUser,
+        worship_id: this.selectedWorship,
+        created_date: format(new Date(), 'YYYY-MM-DD HH:mm:ss')
+      }
+      this.postAttendance(data)
+    },
+    ...mapActions({
+      postAttendance: 'postAttendance'
+    })
   }
 }
 </script>

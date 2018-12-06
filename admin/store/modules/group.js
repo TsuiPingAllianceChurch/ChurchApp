@@ -24,7 +24,6 @@ export default {
       return state
     },
     getGroup: (state) => (groupId) => {
-      console.warn('get group', groupId)
       return _find(state, {group_id: groupId})
     }
   },
