@@ -23,7 +23,9 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
+import { format } from 'date-fns'
+
 export default {
   name: 'auto-input',
   data () {
@@ -31,6 +33,14 @@ export default {
       attendanceStr: '',
       worshiptype: ''
     }
+  },
+  computed: {
+    ...mapGetters({
+      getWorship: 'getWorship',
+      getGroups: 'getGroups',
+      getUsers: 'getUsers',
+      getMembers: 'getMembers'
+    })
   },
   methods: {
     submitAttendance: function () {
@@ -40,14 +50,17 @@ export default {
       while ((match = pat.exec(this.attendanceStr)) !== null) {
         // perform decode and submit to backend
         var search = match[0].slice(1, -1)
-        console.log('submit ' + search + ' for ' + this.worshiptype)
+        const data = {
+          user_id: search,
+          worship_id: this.worshiptype,
+          created_date: format(new Date(), 'YYYY-MM-DD HH:mm:ss')
+        }
+        this.postAttendance(data)
         this.attendanceStr = this.attendanceStr.replace(match[0], '')
       }
-    }
-  },
-  computed: {
-    ...mapGetters({
-      getWorship: 'getWorship'
+    },
+    ...mapActions({
+      postAttendance: 'postAttendance'
     })
   }
 }
