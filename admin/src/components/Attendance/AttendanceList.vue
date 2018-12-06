@@ -33,7 +33,7 @@ export default {
         result.push({
           userName: _get(this.getUser(attendance.user_id), 'name_zh-hk', ''),
           groupName: _get(this.getGroup(attendance.user_id), 'name_zh-hk', ''),
-          date: attendance.create_date
+          date: attendance.created_date
         })
       })
       return result
