@@ -7,3 +7,11 @@ export const getAttendances = async () => {
     })
   })
 }
+
+export const postAttendances = async (data) => {
+  return new Promise((resolve, reject) => {
+    axios.post('https://tpac-api.homeip.net/api.php/Attendance', data).then(response => {
+      return resolve(response.data)
+    })
+  })
+}
