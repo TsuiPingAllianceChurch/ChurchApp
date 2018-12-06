@@ -1,12 +1,14 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <div v-for="(worship, key) in getWorship" :key="key">
+    <div class="link"><a href="/#/manual_attend">Manual Attend</a></div>
+    <div class="link"><a href="/#/auto_attend">Auto Attend</a></div>
+    <!-- <div v-for="(worship, key) in getWorship" :key="key">
       <input type="radio" :id="worship.worship_id" :value="worship.worship_id" v-model="picked">
       <label :for="worship.worship_id">{{ worship.date }} - {{ worship.type }}</label>
     </div>
     <span>Picked: {{ picked }}</span>
-    <user-table></user-table>
+    <user-table></user-table> -->
   </div>
 </template>
 
@@ -67,5 +69,8 @@ a {
 }
 .user-row:nth-child(even) {
   background-color: #f5f5f5;
+}
+.link {
+  font-size: 28px;
 }
 </style>
