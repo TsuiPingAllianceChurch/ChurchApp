@@ -31,9 +31,9 @@
         </div>
 
         <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Encoded</label>
-            <div class="col-sm-4">
-                {{encodeValue}}
+            <label class="col-sm-2 col-form-label">QR Code:</label>
+            <div class="col-sm-4" v-if="encodeValue != '[]'">
+                <qrcode-vue :value=encodeValue :size="200"></qrcode-vue>
             </div>
         </div>
 
@@ -42,6 +42,7 @@
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import QrcodeVue from 'qrcode.vue'
 import _map from 'lodash/map'
 import _indexOf from 'lodash/indexOf'
 import { format } from 'date-fns'
@@ -64,7 +65,7 @@ export default {
       getMembers: 'getMembers'
     }),
     encodeValue: function () {
-      return encode(this.selectedUser)
+      return '[' + encode(this.selectedUser) + ']'
     }
   },
   methods: {
@@ -91,6 +92,9 @@ export default {
     ...mapActions({
       postAttendance: 'postAttendance'
     })
+  },
+  components: {
+    QrcodeVue
   }
 }
 </script>
