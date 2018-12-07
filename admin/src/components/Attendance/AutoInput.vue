@@ -25,6 +25,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import { format } from 'date-fns'
+import { decode } from '../../util/AESUtils'
 
 export default {
   name: 'auto-input',
@@ -49,13 +50,18 @@ export default {
       var match
       while ((match = pat.exec(this.attendanceStr)) !== null) {
         // perform decode and submit to backend
-        var search = match[0].slice(1, -1)
-        const data = {
-          user_id: search,
-          worship_id: this.worshiptype,
-          created_date: format(new Date(), 'YYYY-MM-DD HH:mm:ss')
+        try {
+          var search = decode(match[0].slice(1, -1))
+          console.log('search:' + search)
+          const data = {
+            user_id: search,
+            worship_id: this.worshiptype,
+            created_date: format(new Date(), 'YYYY-MM-DD HH:mm:ss')
+          }
+          this.postAttendance(data)
+        } catch (e) {
+          console.log(e)
         }
-        this.postAttendance(data)
         this.attendanceStr = this.attendanceStr.replace(match[0], '')
       }
     },
