@@ -4,7 +4,10 @@ var key = [7, 2, 4, 3, 6, 1, 9, 2, 5, 2, 1, 7, 9, 2, 8, 3]
 var aes = new aesjs.AES(key)
 
 export function encode (value) {
-  var textBytes = aesjs.utils.utf8.toBytes('0'.repeat(16 - value.length) + value)
+  if (isNaN(value)) {
+    return ''
+  }
+  var textBytes = aesjs.utils.utf8.toBytes('0'.repeat(16 - value.toString().length) + value)
   var encryptedBytes = aes.encrypt(textBytes)
   var encryptedHex = aesjs.utils.hex.fromBytes(encryptedBytes)
   return encryptedHex
