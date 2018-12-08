@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
             <!--Main Content-->
-            <div class="col-lg-6 col-lg-push-6 d-none d-lg-block">
+            <div class="col-lg-6 col-lg-push-6">
                 <attendance-auto></attendance-auto>
             </div>
 
