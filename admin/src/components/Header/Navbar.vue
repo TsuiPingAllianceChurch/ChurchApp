@@ -20,15 +20,15 @@ export default {
       links: [{
         path: '/#/',
         page: 'Home',
-        text: 'Home'
+        text: '主頁'
       }, {
         path: '/#/auto_attend',
         page: 'AutoAttend',
-        text: 'Auto Attend'
+        text: '自動點名'
       }, {
         path: '/#/manual_attend',
         page: 'ManualAttend',
-        text: 'Manual Attend'
+        text: '手動點名'
       }]
     }
   }
