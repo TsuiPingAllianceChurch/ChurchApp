@@ -26,7 +26,7 @@ export default {
     setInterval(() => {
       console.log('refresh for attendances list...')
       self.fetchAttendances()
-    }, 5000)
+    }, 20000)
   }
 }
 </script>

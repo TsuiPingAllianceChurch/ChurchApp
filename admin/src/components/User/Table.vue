@@ -1,17 +1,19 @@
 <template>
   <div class="user-table">
-    <div class="user-row user-row_head">
-      <div class="user-column">User Id</div>
-      <div class="user-column">Name</div>
-    </div>
-    <div v-for="(item, key) in getUsers" :key="key" class="user-row">
-      <div class="user-column">{{ item['user_id'] }}</div>
-      <div class="user-column">{{ item['name_zh-hk'] }}</div>
-    </div>
+
+<div class="card" style="width: 18rem;" v-for="(item, key) in getUsers" :key="key" >
+  <qrcode-vue :value=item.qrcode :size="200" level="H" class="card-img-top"></qrcode-vue>
+  <div class="card-body">
+    <h5 class="card-title">{{ item['name_zh-hk'] }}</h5>
+    <p class="card-text">{{ item['user_id'] }}</p>
+  </div>
+</div>
+
   </div>
 </template>
 
 <script>
+import QrcodeVue from 'qrcode.vue'
 import { mapGetters } from 'vuex'
 export default {
   name: 'Home',
@@ -24,6 +26,9 @@ export default {
     ...mapGetters({
       getUsers: 'getUsers'
     })
+  },
+  components: {
+    QrcodeVue
   }
 }
 </script>

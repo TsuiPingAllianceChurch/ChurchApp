@@ -30,23 +30,14 @@
             </div>
         </div>
 
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">QR Code:</label>
-            <div class="col-sm-4" v-if="encodeValue != '[]'">
-                <qrcode-vue :value=encodeValue :size="200"></qrcode-vue>
-            </div>
-        </div>
-
         <button type="button" class="btn btn-primary" @click="onSubmit" >Submit</button>
     </form>
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import QrcodeVue from 'qrcode.vue'
 import _map from 'lodash/map'
 import _indexOf from 'lodash/indexOf'
 import { format } from 'date-fns'
-import { encode } from '../../util/AESUtils'
 
 export default {
   name: 'manual-input',
@@ -63,10 +54,7 @@ export default {
       getGroups: 'getGroups',
       getUsers: 'getUsers',
       getMembers: 'getMembers'
-    }),
-    encodeValue: function () {
-      return '[' + encode(this.selectedUser) + ']'
-    }
+    })
   },
   methods: {
     checkInGroup (userId) {
@@ -92,9 +80,6 @@ export default {
     ...mapActions({
       postAttendance: 'postAttendance'
     })
-  },
-  components: {
-    QrcodeVue
   }
 }
 </script>

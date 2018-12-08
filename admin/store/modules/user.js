@@ -2,6 +2,7 @@ import Vue from 'vue'
 import _map from 'lodash/map'
 import _find from 'lodash/find'
 import { getUsers } from '../../api/user'
+import { encode } from '../../src/util/AESUtils'
 
 export default {
   state: {},
@@ -29,6 +30,7 @@ export default {
   },
   mutations: {
     setUser: (state, {key, item}) => {
+      item.qrcode = '[' + encode(item.user_id) + ']'
       Vue.set(state, key, item)
     }
   }
