@@ -13,7 +13,7 @@ export default {
       return new Promise((resolve, reject) => {
         return getAttendances(maxAttendenceId).then((result) => {
           _map(result.Attendance, (item, key) => {
-            commit('setAttendances', {key, item})
+            commit('setAttendances', {key: (key + maxAttendenceId), item})
           })
           return resolve(result)
         }).catch((err) => {
@@ -50,6 +50,7 @@ export default {
   },
   mutations: {
     setAttendances: (state, {key, item}) => {
+      console.log('setAttendances', key, item)
       Vue.set(state, key, item)
     }
   }
