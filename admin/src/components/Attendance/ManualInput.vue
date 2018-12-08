@@ -35,13 +35,14 @@
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import _get from 'lodash/get'
 import _map from 'lodash/map'
 import _indexOf from 'lodash/indexOf'
 import { format } from 'date-fns'
+import ValidateSubmit from '../../mixins/ValidateSubmit'
 
 export default {
   name: 'manual-input',
+  mixins: [ValidateSubmit],
   data () {
     return {
       selectedWorship: '',
@@ -85,39 +86,6 @@ export default {
         this.postAttendance(data)
       }
       this.$swal(message.title, message.desc, message.status)
-    },
-    getSweetMessage (userId, worshipId) {
-      const validWorship = this.getWorship(worshipId)
-      if (validWorship === undefined) {
-        return this.errorMessage('請選擇崇拜')
-      }
-      const validUser = this.getUser(userId)
-      if (validUser === undefined) {
-        return this.errorMessage('請選擇姓名')
-      }
-      const isAttended = this.getAttendance(userId, worshipId)
-      if (isAttended) {
-        return this.warningMessage(`團友 ${_get(validUser, 'name_zh-hk')} 已點過名了`)
-      }
-      return {
-        title: '成功點名',
-        desc: `${_get(this.getUser(userId), 'name_zh-hk', '')}`,
-        status: 'success'
-      }
-    },
-    errorMessage (desc) {
-      return {
-        title: '點名不成功',
-        desc,
-        status: 'error'
-      }
-    },
-    warningMessage (desc) {
-      return {
-        title: '注意',
-        desc,
-        status: 'warning'
-      }
     },
     ...mapActions({
       postAttendance: 'postAttendance'

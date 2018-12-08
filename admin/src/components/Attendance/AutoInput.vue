@@ -29,9 +29,11 @@ import { format } from 'date-fns'
 import _get from 'lodash/get'
 import _find from 'lodash/find'
 import { decode } from '../../util/AESUtils'
+import ValidateSubmit from '../../mixins/ValidateSubmit'
 
 export default {
   name: 'auto-input',
+  mixins: [ValidateSubmit],
   data () {
     return {
       attendanceStr: '',
@@ -57,12 +59,16 @@ export default {
         try {
           var search = decode(match[0].slice(1, -1))
           console.log('search:' + search)
-          const data = {
-            user_id: search,
-            worship_id: this.worshipId,
-            created_date: format(new Date(), 'YYYY-MM-DD HH:mm:ss')
+          const message = this.getSweetMessage(search, this.worshipId)
+          if (message.status === 'success') {
+            const data = {
+              user_id: search,
+              worship_id: this.worshipId,
+              created_date: format(new Date(), 'YYYY-MM-DD HH:mm:ss')
+            }
+            this.postAttendance(data)
           }
-          this.postAttendance(data)
+          this.$swal(message.title, message.desc, message.status)
         } catch (e) {
           console.log(e)
         }
