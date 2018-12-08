@@ -7,7 +7,6 @@ export default {
   },
   actions: {
     updatePage: ({commit}, {page}) => {
-      console.warn('updatePage action', page)
       commit('setPage', {page})
     }
   },

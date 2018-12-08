@@ -18,6 +18,10 @@ export default {
     return {
       active: null,
       links: [{
+        path: '/#/',
+        page: 'Home',
+        text: 'Home'
+      }, {
         path: '/#/auto_attend',
         page: 'AutoAttend',
         text: 'Auto Attend'
@@ -25,10 +29,6 @@ export default {
         path: '/#/manual_attend',
         page: 'ManualAttend',
         text: 'Manual Attend'
-      }, {
-        path: '/#/users',
-        page: 'Users',
-        text: 'User List'
       }]
     }
   }
@@ -40,7 +40,7 @@ export default {
 .navbar {
   height: 40px;
   background-color: #1c2129;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 .navbar ul {
   list-style: none;

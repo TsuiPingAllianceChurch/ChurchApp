@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: 'ManualAttend',
+  name: 'Users',
   components: {
     'user-table': () => import(/* webpackChunkName: "User" */ './User/Table')
   }
