@@ -31,10 +31,13 @@ export default {
     attendanceList () {
       let result = []
       _map(this.getAttendances, attendance => {
+        const user = this.getUser(attendance.user_id)
+        const member = this.getMember(attendance.user_id)
+        const group = this.getGroup(_get(member, 'group_id'))
         result.push({
           attendanceId: attendance.attendance_id,
-          userName: _get(this.getUser(attendance.user_id), 'name_zh-hk', ''),
-          groupName: _get(this.getGroup(attendance.user_id), 'name_zh-hk', ''),
+          userName: _get(user, 'name_zh-hk', ''),
+          groupName: _get(group, 'name_zh-hk', ''),
           date: attendance.created_date
         })
       })
@@ -43,6 +46,7 @@ export default {
     ...mapGetters({
       getGroup: 'getGroup',
       getUser: 'getUser',
+      getMember: 'getMember',
       getAttendances: 'getAttendances'
     })
   }
