@@ -1,6 +1,7 @@
 <template>
-  <div class="card-columns" >
-    <div class="card" v-for="(item, key) in attendanceList" :key="key">
+  <div class="row">
+    <div class="col-sm-3" v-for="(item, key) in attendanceList" :key="key">
+    <div class="card">
       <img class="card-img-top" :src=item.avator alt="Avator">
       <div class="card-body">
         <h5 class="card-title">{{ item.userName }}</h5>
@@ -9,6 +10,7 @@
       <div class="card-footer">
         <small class="text-muted">#{{ item.attendanceId }} : {{ displayDate(item.date) }}</small>
       </div>
+    </div>
     </div>
   </div>
 </template>
@@ -59,3 +61,9 @@ export default {
   }
 }
 </script>
+
+<style>
+  .card {
+    margin: 10px
+  }
+</style>
