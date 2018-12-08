@@ -6,16 +6,11 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 export default {
   name: 'App',
   components: {
     'navbar': () => import(/* webpackChunkName: "Header" */ './components/Header/Navbar')
-  },
-  computed: {
-    ...mapGetters({
-      getMaxAttendanceId: 'getMaxAttendanceId'
-    })
   },
   methods: {
     ...mapActions({
@@ -34,7 +29,7 @@ export default {
     const self = this
     setInterval(() => {
       // fetchAttendances will only retrieve new data
-      self.fetchAttendances(self.getMaxAttendanceId())
+      self.fetchAttendances()
     }, 5000)
   }
 }
