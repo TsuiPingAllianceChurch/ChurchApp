@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import _map from 'lodash/map'
+import _find from 'lodash/find'
 import { getWorship } from '../../api/worship'
 
 export default {
@@ -19,8 +20,11 @@ export default {
     }
   },
   getters: {
-    getWorship: (state) => {
+    getWorships: (state) => {
       return state
+    },
+    getWorship: (state) => (worshipId) => {
+      return _find(state, {worship_id: worshipId})
     }
   },
   mutations: {

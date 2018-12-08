@@ -4,7 +4,7 @@
             <div class="col-3">
                 <select class="form-control" v-model="worshipId">
                     <option value="default">-- 請選擇 --</option>
-                    <option v-for="(worship, key) in getWorship" :value="worship.worship_id" :key="key">{{ worship.type }}</option>
+                    <option v-for="(worship, key) in getWorships" :value="worship.worship_id" :key="key">{{ worship.type }}</option>
                 </select>
             </div>
         </div>
@@ -41,7 +41,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getWorship: 'getWorship',
+      getWorships: 'getWorships',
       getGroups: 'getGroups',
       getUsers: 'getUsers',
       getMembers: 'getMembers'
@@ -74,7 +74,7 @@ export default {
       if (format(new Date(), 'HH:mm:ss') > '09:45') {
         this.worshipType = '午堂'
       }
-      this.worshipId = _get(_find(this.getWorship, {type: this.worshipType}), 'worship_id')
+      this.worshipId = _get(_find(this.getWorships, {type: this.worshipType}), 'worship_id')
     },
     ...mapActions({
       postAttendance: 'postAttendance'

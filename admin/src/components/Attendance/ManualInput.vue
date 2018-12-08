@@ -5,7 +5,7 @@
             <div class="col-sm-4">
                 <select class="form-control" v-model="selectedWorship">
                     <option value="">-- 請選擇 --</option>
-                    <option v-for="(worship, key) in getWorship" :value="worship.worship_id" :key="key">{{ worship.type }}</option>
+                    <option v-for="(worship, key) in getWorships" :value="worship.worship_id" :key="key">{{ worship.type }}</option>
                 </select>
             </div>
         </div>
@@ -37,7 +37,6 @@
 import { mapGetters, mapActions } from 'vuex'
 import _get from 'lodash/get'
 import _map from 'lodash/map'
-import _find from 'lodash/find'
 import _indexOf from 'lodash/indexOf'
 import { format } from 'date-fns'
 
@@ -52,9 +51,13 @@ export default {
   },
   computed: {
     ...mapGetters({
+      getAttendances: 'getAttendances',
+      getAttendance: 'getAttendance',
+      getWorships: 'getWorships',
       getWorship: 'getWorship',
       getGroups: 'getGroups',
       getUsers: 'getUsers',
+      getUser: 'getUser',
       getMembers: 'getMembers'
     })
   },
@@ -81,18 +84,22 @@ export default {
       const message = this.getSweetMessage(this.selectedUser, this.selectedWorship)
       this.$swal(message.title, message.desc, message.status)
     },
-    getSweetMessage (user_id, worship_id) {
-      const validWorship = _find(this.getWorship, {worship_id})
+    getSweetMessage (userId, worshipId) {
+      const validWorship = this.getWorship(worshipId)
       if (validWorship === undefined) {
         return this.errorMessage('請選擇崇拜')
       }
-      const validUser = _find(this.getUsers, {user_id})
+      const validUser = this.getUser(userId)
       if (validUser === undefined) {
         return this.errorMessage('請選擇姓名')
       }
+      const isAttended = this.getAttendance(userId, worshipId)
+      if (isAttended) {
+        return this.warningMessage(`團友 ${_get(validUser, 'name_zh-hk')} 已點過名了`)
+      }
       return {
         title: '成功點名',
-        desc: `${_get(_find(this.getUsers, {user_id}), 'name_zh-hk', '')}, ${_get(_find(this.getGroups, {user_id}), 'name_zh-hk', '')}`,
+        desc: `${_get(this.getUser(userId), 'name_zh-hk', '')}`,
         status: 'success'
       }
     },
@@ -101,6 +108,13 @@ export default {
         title: '點名不成功',
         desc,
         status: 'error'
+      }
+    },
+    warningMessage (desc) {
+      return {
+        title: '注意',
+        desc,
+        status: 'warning'
       }
     },
     ...mapActions({
