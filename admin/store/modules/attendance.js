@@ -23,7 +23,7 @@ export default {
       console.log('postAttendance', data)
       return new Promise((resolve, reject) => {
         return postAttendances(data).then((result) => {
-          if (result === 0) {
+          if (result >= 0) {
             return resolve(true)
           }
           return false

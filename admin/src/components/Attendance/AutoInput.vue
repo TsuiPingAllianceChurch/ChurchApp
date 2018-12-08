@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-3">
                 <select class="form-control" v-model="worshipId">
-                    <option value="default">-- 請選擇 --</option>
+                    <option value="">-- 請選擇 --</option>
                     <option v-for="(worship, key) in getWorships" :value="worship.worship_id" :key="key">{{ worship.type }}</option>
                 </select>
             </div>
@@ -36,7 +36,7 @@ export default {
     return {
       attendanceStr: '',
       worshipType: '早堂',
-      worshipId: 'default'
+      worshipId: ''
     }
   },
   computed: {
