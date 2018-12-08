@@ -26,8 +26,6 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import { format } from 'date-fns'
-import _get from 'lodash/get'
-import _find from 'lodash/find'
 import { decode } from '../../util/AESUtils'
 import ValidateSubmit from '../../mixins/ValidateSubmit'
 
@@ -36,9 +34,7 @@ export default {
   mixins: [ValidateSubmit],
   data () {
     return {
-      attendanceStr: '',
-      worshipType: '早堂',
-      worshipId: ''
+      attendanceStr: ''
     }
   },
   computed: {
@@ -46,7 +42,8 @@ export default {
       getWorships: 'getWorships',
       getGroups: 'getGroups',
       getUsers: 'getUsers',
-      getMembers: 'getMembers'
+      getMembers: 'getMembers',
+      worshipId: 'getCurrentWorship'
     })
   },
   methods: {
@@ -75,25 +72,9 @@ export default {
         this.attendanceStr = this.attendanceStr.replace(match[0], '')
       }
     },
-    getWorshipType () {
-      console.log('refresh for worship type...')
-      if (format(new Date(), 'HH:mm:ss') > '09:45') {
-        this.worshipType = '午堂'
-      }
-      this.worshipId = _get(_find(this.getWorships, {type: this.worshipType}), 'worship_id')
-    },
     ...mapActions({
       postAttendance: 'postAttendance'
     })
-  },
-  mounted () {
-    const self = this
-    setTimeout(() => {
-      self.getWorshipType()
-    }, 5000)
-    setInterval(() => {
-      self.getWorshipType()
-    }, 900000) // 15 mins
   }
 }
 </script>

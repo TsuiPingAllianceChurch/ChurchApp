@@ -18,7 +18,8 @@ export default {
       fetchWorship: 'fetchWorship',
       fetchGroups: 'fetchGroups',
       fetchMembers: 'fetchMembers',
-      fetchAttendances: 'fetchAttendances'
+      fetchAttendances: 'fetchAttendances',
+      updateCurrentWorship: 'updateCurrentWorship'
     })
   },
   mounted () {
@@ -31,6 +32,12 @@ export default {
       // fetchAttendances will only retrieve new data
       self.fetchAttendances()
     }, 5000)
+    setTimeout(() => {
+      self.updateCurrentWorship()
+    }, 5000)
+    setInterval(() => {
+      self.updateCurrentWorship()
+    }, 900000) // 15 mins
   }
 }
 </script>

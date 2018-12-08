@@ -45,7 +45,6 @@ export default {
   mixins: [ValidateSubmit],
   data () {
     return {
-      selectedWorship: '',
       selectedGroup: '',
       selectedUser: ''
     }
@@ -59,7 +58,8 @@ export default {
       getGroups: 'getGroups',
       getUsers: 'getUsers',
       getUser: 'getUser',
-      getMembers: 'getMembers'
+      getMembers: 'getMembers',
+      selectedWorship: 'getCurrentWorship'
     })
   },
   methods: {
