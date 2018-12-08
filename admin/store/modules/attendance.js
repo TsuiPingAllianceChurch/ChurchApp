@@ -1,14 +1,15 @@
 import Vue from 'vue'
 import _map from 'lodash/map'
 import _find from 'lodash/find'
+import _max from 'lodash/max'
 import { getAttendances, postAttendances } from '../../api/attendance'
 
 export default {
-  state: { maxId: 0 },
+  state: {},
   actions: {
-    fetchAttendances: ({commit}, maxId) => {
+    fetchAttendances: ({commit, getters}) => {
       return new Promise((resolve, reject) => {
-        return getAttendances(maxId).then((result) => {
+        return getAttendances(getters.getMaxAttendanceId).then((result) => {
           _map(result.Attendance, (item, key) => {
             commit('setAttendances', {key, item})
           })
@@ -22,7 +23,7 @@ export default {
       console.log('postAttendance', data)
       return new Promise((resolve, reject) => {
         return postAttendances(data).then((result) => {
-          if (result === 0) {
+          if (result >= 0) {
             return resolve(true)
           }
           return false
@@ -40,15 +41,14 @@ export default {
       return _find(state, {user_id: userId, worship_id: worshipId})
     },
     getMaxAttendanceId: (state) => {
-      return state.maxId
+      let list = []
+      _map(state, item => { list.push(item.attendance_id) })
+      return _max(list)
     }
   },
   mutations: {
     setAttendances: (state, {key, item}) => {
       Vue.set(state, key, item)
-      if (state.maxId < item.attendance_id) {
-        Vue.set(state, 'maxId', item.attendance_id)
-      }
     }
   }
 }
