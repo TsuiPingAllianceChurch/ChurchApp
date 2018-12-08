@@ -1,27 +1,20 @@
 <template>
-  <div class="hello">
+  <div class="home">
     <h1>{{ msg }}</h1>
     <users></users>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
   name: 'Home',
   data () {
     return {
-      msg: 'Church Admin App',
-      picked: 0
+      msg: 'Church Admin App'
     }
   },
   components: {
     'users': () => import(/* webpackChunkName: "User" */ './Users')
-  },
-  computed: {
-    ...mapGetters({
-      getWorship: 'getWorship'
-    })
   }
 }
 </script>
