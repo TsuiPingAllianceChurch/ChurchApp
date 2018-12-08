@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <navbar></navbar>
     <router-view/>
   </div>
 </template>
@@ -8,6 +9,9 @@
 import { mapActions } from 'vuex'
 export default {
   name: 'App',
+  components: {
+    'navbar': () => import(/* webpackChunkName: "Header" */ './components/Header/Navbar')
+  },
   methods: {
     ...mapActions({
       fetchUsers: 'fetchUsers',
@@ -38,6 +42,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
