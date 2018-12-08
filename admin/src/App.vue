@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'App',
   components: {
@@ -19,6 +19,9 @@ export default {
       fetchGroups: 'fetchGroups',
       fetchMembers: 'fetchMembers',
       fetchAttendances: 'fetchAttendances'
+    }),
+    ...mapGetters({
+      getMaxAttendanceId: 'getMaxAttendanceId'
     })
   },
   mounted () {
@@ -30,7 +33,7 @@ export default {
     setInterval(() => {
       // console.log('refresh for attendances list...')
       // fetchAttendances will only retrieve new data
-      self.fetchAttendances()
+      self.fetchAttendances(self.getMaxAttendanceId())
     }, 5000)
   }
 }
