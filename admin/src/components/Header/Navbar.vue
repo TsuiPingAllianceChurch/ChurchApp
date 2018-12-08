@@ -29,6 +29,10 @@ export default {
         path: '/#/manual_attend',
         page: 'ManualAttend',
         text: '手動點名'
+      }, {
+        path: '/#/attendance',
+        page: 'Attendance',
+        text: '點名表'
       }]
     }
   }
