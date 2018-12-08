@@ -28,9 +28,10 @@ export default {
     this.fetchMembers()
     const self = this
     setInterval(() => {
-      console.log('refresh for attendances list...')
+      // console.log('refresh for attendances list...')
+      // fetchAttendances will only retrieve new data
       self.fetchAttendances()
-    }, 20000)
+    }, 5000)
   }
 }
 </script>

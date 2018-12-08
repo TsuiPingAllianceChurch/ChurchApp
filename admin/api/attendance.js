@@ -1,8 +1,8 @@
 import axios from 'axios'
 
-export const getAttendances = async () => {
+export const getAttendances = async (maxId) => {
   return new Promise((resolve, reject) => {
-    axios.get('https://tpac-api.homeip.net/api.php/Attendance?order[]=attendance_id,desc&transform=1').then(response => {
+    axios.get('https://tpac-api.homeip.net/api.php/Attendance?order[]=attendance_id,desc&transform=1&filter=attendance_id,gt,' + maxId).then(response => {
       return resolve(response.data)
     })
   })
