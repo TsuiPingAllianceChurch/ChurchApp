@@ -1,8 +1,8 @@
 USE tpac_db;
 
 insert into User ( user_id, name_en, `name_zh-hk`, created_date ) values ( 1, 'Chan Tai Man', '陳大文', NOW() );
-insert into User ( user_id, nname_en, `name_zh-hk`, created_date ) values ( 2, 'You Tai Man', '游大文', NOW() );
-insert into User ( user_id, nname_en, `name_zh-hk`, created_date ) values ( 3, 'Wong Tai Man', '王大文', NOW() );
+insert into User ( user_id, name_en, `name_zh-hk`, created_date ) values ( 2, 'You Tai Man', '游大文', NOW() );
+insert into User ( user_id, name_en, `name_zh-hk`, created_date ) values ( 3, 'Wong Tai Man', '王大文', NOW() );
 
 
 insert into `Group` ( group_id, type, name_en, `name_zh-hk`, created_date ) values ( 1, '團契', '', '馬利亞團', NOW() );
