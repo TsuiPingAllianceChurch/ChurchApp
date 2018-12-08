@@ -19,6 +19,7 @@ export default {
       })
     },
     postAttendance: ({commit}, data) => {
+      console.log('postAttendance', data)
       return new Promise((resolve, reject) => {
         return postAttendances(data).then((result) => {
           if (result === 0) {

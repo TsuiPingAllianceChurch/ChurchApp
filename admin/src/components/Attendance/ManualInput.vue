@@ -75,13 +75,15 @@ export default {
       this.selectedUser = 'default'
     },
     onSubmit () {
-      const data = {
-        user_id: this.selectedUser,
-        worship_id: this.selectedWorship,
-        created_date: format(new Date(), 'YYYY-MM-DD HH:mm:ss')
-      }
-      this.postAttendance(data)
       const message = this.getSweetMessage(this.selectedUser, this.selectedWorship)
+      if (message.status === 'success') {
+        const data = {
+          user_id: this.selectedUser,
+          worship_id: this.selectedWorship,
+          created_date: format(new Date(), 'YYYY-MM-DD HH:mm:ss')
+        }
+        this.postAttendance(data)
+      }
       this.$swal(message.title, message.desc, message.status)
     },
     getSweetMessage (userId, worshipId) {
