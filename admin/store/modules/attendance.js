@@ -5,9 +5,9 @@ import { getAttendances, postAttendances } from '../../api/attendance'
 export default {
   state: { maxId: 0 },
   actions: {
-    fetchAttendances: ({commit}) => {
+    fetchAttendances: ({commit}, maxId) => {
       return new Promise((resolve, reject) => {
-        return getAttendances(this.a.state.maxId).then((result) => {
+        return getAttendances(maxId).then((result) => {
           _map(result.Attendance, (item, key) => {
             commit('setAttendances', {key, item})
           })
@@ -33,6 +33,9 @@ export default {
   getters: {
     getAttendances: (state) => {
       return state
+    },
+    getMaxAttendanceId: (state) => {
+      return state.maxId
     }
   },
   mutations: {
