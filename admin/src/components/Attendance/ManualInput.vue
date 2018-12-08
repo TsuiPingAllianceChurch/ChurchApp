@@ -81,6 +81,7 @@ export default {
       const message = this.getSweetMessage(this.selectedUser, this.selectedWorship)
       this.$swal(message.title, message.desc, message.status)
     },
+    // eslint-disable-next-line
     getSweetMessage (user_id, worship_id) {
       const validWorship = _find(this.getWorship, {worship_id})
       if (validWorship === undefined) {
