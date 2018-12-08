@@ -29,6 +29,7 @@ insert into Group_Member ( group_id, user_id, created_date ) values ( 2, 3, NOW(
 
 insert into Worship ( worship_id, date, type, remark, created_date ) values ( 1, '2018-12-02', '早堂', '', NOW() );
 insert into Worship ( worship_id, date, type, remark, created_date ) values ( 2, '2018-12-02', '午堂', '', NOW() );
-
+insert into Worship ( worship_id, date, type, remark, created_date ) values ( 3, '2018-12-09', '早堂', '', NOW() );
+insert into Worship ( worship_id, date, type, remark, created_date ) values ( 4, '2018-12-09', '午堂', '', NOW() );
 
 
