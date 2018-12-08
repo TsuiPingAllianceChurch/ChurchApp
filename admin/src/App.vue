@@ -6,20 +6,32 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'App',
   components: {
     'navbar': () => import(/* webpackChunkName: "Header" */ './components/Header/Navbar')
   },
+  computed: {
+    ...mapGetters({
+      getCurrentWorship: 'getCurrentWorship'
+    })
+  },
   methods: {
+    IsPostWorship () {
+      if (!this.getCurrentWorship) {
+        console.log('need to post worship')
+        this.postWorships()
+      }
+    },
     ...mapActions({
       fetchUsers: 'fetchUsers',
       fetchWorship: 'fetchWorship',
       fetchGroups: 'fetchGroups',
       fetchMembers: 'fetchMembers',
       fetchAttendances: 'fetchAttendances',
-      updateCurrentWorship: 'updateCurrentWorship'
+      updateCurrentWorship: 'updateCurrentWorship',
+      postWorships: 'postWorships'
     })
   },
   mounted () {
@@ -35,8 +47,12 @@ export default {
     setTimeout(() => {
       self.updateCurrentWorship()
     }, 5000)
+    setTimeout(() => {
+      self.IsPostWorship()
+    }, 10000)
     setInterval(() => {
       self.updateCurrentWorship()
+      self.IsPostWorship()
     }, 900000) // 15 mins
   }
 }
