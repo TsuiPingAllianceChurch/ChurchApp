@@ -24,6 +24,7 @@
 import { mapGetters } from 'vuex'
 import _get from 'lodash/get'
 import _map from 'lodash/map'
+import _sortBy from 'lodash/sortBy'
 
 export default {
   name: 'attendanceList',
@@ -41,7 +42,7 @@ export default {
           date: attendance.created_date
         })
       })
-      return result
+      return _sortBy(result, (item) => { return item.date })
     },
     ...mapGetters({
       getGroup: 'getGroup',
