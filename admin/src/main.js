@@ -9,6 +9,7 @@ import { createStore } from '../store/index'
 const store = createStore()
 
 Vue.config.productionTip = false
+Vue.use(require('vue-moment'))
 
 /* eslint-disable no-new */
 new Vue({
