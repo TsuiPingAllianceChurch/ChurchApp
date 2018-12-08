@@ -46,7 +46,8 @@ export default {
   data () {
     return {
       selectedGroup: '',
-      selectedUser: ''
+      selectedUser: '',
+      selectedWorship: ''
     }
   },
   computed: {
@@ -59,7 +60,7 @@ export default {
       getUsers: 'getUsers',
       getUser: 'getUser',
       getMembers: 'getMembers',
-      selectedWorship: 'getCurrentWorship'
+      getCurrentWorship: 'getCurrentWorship'
     })
   },
   methods: {
@@ -90,6 +91,11 @@ export default {
     ...mapActions({
       postAttendance: 'postAttendance'
     })
+  },
+  watch: {
+    getCurrentWorship (val) {
+      this.selectedWorship = val
+    }
   }
 }
 </script>
