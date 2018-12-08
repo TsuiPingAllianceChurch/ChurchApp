@@ -12,6 +12,11 @@ export default {
   components: {
     'navbar': () => import(/* webpackChunkName: "Header" */ './components/Header/Navbar')
   },
+  computed: {
+    ...mapGetters({
+      getMaxAttendanceId: 'getMaxAttendanceId'
+    })
+  },
   methods: {
     ...mapActions({
       fetchUsers: 'fetchUsers',
@@ -19,9 +24,6 @@ export default {
       fetchGroups: 'fetchGroups',
       fetchMembers: 'fetchMembers',
       fetchAttendances: 'fetchAttendances'
-    }),
-    ...mapGetters({
-      getMaxAttendanceId: 'getMaxAttendanceId'
     })
   },
   mounted () {
@@ -31,7 +33,6 @@ export default {
     this.fetchMembers()
     const self = this
     setInterval(() => {
-      // console.log('refresh for attendances list...')
       // fetchAttendances will only retrieve new data
       self.fetchAttendances(self.getMaxAttendanceId())
     }, 5000)
