@@ -3,11 +3,11 @@ import _map from 'lodash/map'
 import { getAttendances, postAttendances } from '../../api/attendance'
 
 export default {
-  state: {},
+  state: { maxId: 0 },
   actions: {
     fetchAttendances: ({commit}) => {
       return new Promise((resolve, reject) => {
-        return getAttendances().then((result) => {
+        return getAttendances(this.a.state.maxId).then((result) => {
           _map(result.Attendance, (item, key) => {
             commit('setAttendances', {key, item})
           })
@@ -38,6 +38,9 @@ export default {
   mutations: {
     setAttendances: (state, {key, item}) => {
       Vue.set(state, key, item)
+      if (state.maxId < item.attendance_id) {
+        Vue.set(state, 'maxId', item.attendance_id)
+      }
     }
   }
 }
