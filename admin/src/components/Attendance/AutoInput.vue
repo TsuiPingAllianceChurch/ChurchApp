@@ -2,7 +2,8 @@
     <form>
         <div class="row">
             <div class="col-3">
-                <select class="form-control" v-model="worshiptype">
+                <select class="form-control" v-model="worshipId">
+                    <option value="default">-- 請選擇 --</option>
                     <option v-for="(worship, key) in getWorship" :value="worship.worship_id" :key="key">{{ worship.type }}</option>
                 </select>
             </div>
@@ -25,6 +26,8 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import { format } from 'date-fns'
+import _get from 'lodash/get'
+import _find from 'lodash/find'
 import { decode } from '../../util/AESUtils'
 
 export default {
@@ -32,7 +35,8 @@ export default {
   data () {
     return {
       attendanceStr: '',
-      worshiptype: ''
+      worshipType: '早堂',
+      worshipId: 'default'
     }
   },
   computed: {
@@ -55,7 +59,7 @@ export default {
           console.log('search:' + search)
           const data = {
             user_id: search,
-            worship_id: this.worshiptype,
+            worship_id: this.worshipId,
             created_date: format(new Date(), 'YYYY-MM-DD HH:mm:ss')
           }
           this.postAttendance(data)
@@ -65,9 +69,25 @@ export default {
         this.attendanceStr = this.attendanceStr.replace(match[0], '')
       }
     },
+    getWorshipType () {
+      console.log('refresh for worship type...')
+      if (format(new Date(), 'HH:mm:ss') > '09:45') {
+        this.worshipType = '午堂'
+      }
+      this.worshipId = _get(_find(this.getWorship, {type: this.worshipType}), 'worship_id')
+    },
     ...mapActions({
       postAttendance: 'postAttendance'
     })
+  },
+  mounted () {
+    const self = this
+    setTimeout(() => {
+      self.getWorshipType()
+    }, 5000)
+    setInterval(() => {
+      self.getWorshipType()
+    }, 900000) // 15 mins
   }
 }
 </script>
