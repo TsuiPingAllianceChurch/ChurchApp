@@ -6,6 +6,10 @@ CREATE TABLE IF NOT EXISTS User (
     user_id INT AUTO_INCREMENT,
     name_en VARCHAR(255) NULL,
     `name_zh-hk` VARCHAR(255) NOT NULL,
+    gender VARCHAR(10) NULL,
+    phone_country VARCHAR(5) NULL,
+    phone VARCHAR(20) NULL,
+    avator TEXT NULL,
     created_date DATETIME NOT NULL,
     PRIMARY KEY (user_id)
 )  ENGINE=INNODB;
