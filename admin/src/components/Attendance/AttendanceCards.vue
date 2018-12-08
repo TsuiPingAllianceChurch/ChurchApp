@@ -7,7 +7,7 @@
         <p class="card-text">{{ item.groupName }}</p>
       </div>
       <div class="card-footer">
-        <small class="text-muted">#{{ item.attendanceId }} : {{ item.date | moment("from") }}</small>
+        <small class="text-muted">#{{ item.attendanceId }} : {{ displayDate(item.date) }}</small>
       </div>
     </div>
   </div>
@@ -15,11 +15,24 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { distanceInWordsToNow } from 'date-fns'
 import _get from 'lodash/get'
 import _map from 'lodash/map'
 
+const zhLocale = require('date-fns/locale/zh_tw')
+
 export default {
   name: 'attendanceCards',
+  data () {
+    return {
+      distanceInWordsToNow
+    }
+  },
+  methods: {
+    displayDate (ddate) {
+      return this.distanceInWordsToNow(ddate, {locale: zhLocale})
+    }
+  },
   computed: {
     attendanceList () {
       let result = []
