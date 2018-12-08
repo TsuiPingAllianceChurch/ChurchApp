@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS Group_Member (
 )  ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS Attendance (
+    attendance_id INT AUTO_INCREMENT,
     user_id INT NOT NULL,
     worship_id INT NOT NULL,
     created_date DATETIME NOT NULL
