@@ -11,7 +11,7 @@
     </thead>
     <tbody>
       <tr v-for="(item, key) in attendanceList" :key="key">
-        <th scope="row">{{ key }} </th>
+        <th scope="row">{{ item.attendanceId }} </th>
         <td>{{ item.userName }}</td>
         <td>{{ item.groupName }}</td>
         <td>{{ item.date }}</td>
@@ -24,6 +24,7 @@
 import { mapGetters } from 'vuex'
 import _get from 'lodash/get'
 import _map from 'lodash/map'
+
 export default {
   name: 'attendanceList',
   computed: {
@@ -31,6 +32,7 @@ export default {
       let result = []
       _map(this.getAttendances, attendance => {
         result.push({
+          attendanceId: attendance.attendance_id,
           userName: _get(this.getUser(attendance.user_id), 'name_zh-hk', ''),
           groupName: _get(this.getGroup(attendance.user_id), 'name_zh-hk', ''),
           date: attendance.created_date

@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const getAttendances = async () => {
   return new Promise((resolve, reject) => {
-    axios.get('https://tpac-api.homeip.net/api.php/Attendance?transform=1').then(response => {
+    axios.get('https://tpac-api.homeip.net/api.php/Attendance?order[]=attendance_id,desc&transform=1').then(response => {
       return resolve(response.data)
     })
   })
