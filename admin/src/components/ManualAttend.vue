@@ -8,7 +8,7 @@
 
             <!--Sidebar-->
             <div class="col-lg-6 col-lg-pull-6">
-                <attendance-cards></attendance-cards>
+                <attendance-list></attendance-list>
             </div>
         </div>
     </div>
@@ -19,7 +19,7 @@ export default {
   name: 'ManualAttend',
   components: {
     'attendance-manual': () => import(/* webpackChunkName: "Attendance" */ './Attendance/ManualInput'),
-    'attendance-cards': () => import(/* webpackChunkName: "Attendance" */ './Attendance/AttendanceCards')
+    'attendance-list': () => import(/* webpackChunkName: "Attendance" */ './Attendance/AttendanceList')
   }
 }
 </script>
