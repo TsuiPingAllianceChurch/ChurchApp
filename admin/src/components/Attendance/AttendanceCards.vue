@@ -18,7 +18,7 @@ import { mapGetters } from 'vuex'
 import { distanceInWordsToNow } from 'date-fns'
 import _get from 'lodash/get'
 import _map from 'lodash/map'
-import _sortBy from 'lodash/sortBy'
+import _orderBy from 'lodash/orderBy'
 
 const zhLocale = require('date-fns/locale/zh_tw')
 
@@ -49,7 +49,7 @@ export default {
           date: attendance.created_date
         })
       })
-      return _sortBy(result, (item) => { return item.date })
+      return _orderBy(result, ['date'], ['desc'])
     },
     ...mapGetters({
       getGroup: 'getGroup',
