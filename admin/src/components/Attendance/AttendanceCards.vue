@@ -1,13 +1,11 @@
 <template>
   <div class="row">
-    <div class="col-sm-4" v-for="(item, key) in attendanceList" :key="key">
+    <div class="col-sm-2" v-for="(item, key) in attendanceList" :key="key">
     <div class="card">
-      <img class="card-img-top" :src=item.avator alt="Avator">
+      <img class="card-img-top rounded-circle" :src=item.avator alt="Avator">
       <div class="card-body">
         <h5 class="card-title">{{ item.userName }}</h5>
         <p class="card-text">{{ item.groupName }}</p>
-      </div>
-      <div class="card-footer">
         <small class="text-muted">#{{ item.attendanceId }} : {{ displayDate(item.date) }}</small>
       </div>
     </div>
@@ -20,7 +18,7 @@ import { mapGetters } from 'vuex'
 import { distanceInWordsToNow } from 'date-fns'
 import _get from 'lodash/get'
 import _map from 'lodash/map'
-import _sortBy from 'lodash/sortBy'
+import _orderBy from 'lodash/orderBy'
 
 const zhLocale = require('date-fns/locale/zh_tw')
 
@@ -51,7 +49,7 @@ export default {
           date: attendance.created_date
         })
       })
-      return _sortBy(result, (item) => { return item.date })
+      return _orderBy(result, ['date'], ['desc'])
     },
     ...mapGetters({
       getGroup: 'getGroup',
@@ -66,5 +64,12 @@ export default {
 <style>
   .card {
     margin: 10px
+  }
+  .card-img-top {
+    width: 60%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
   }
 </style>
