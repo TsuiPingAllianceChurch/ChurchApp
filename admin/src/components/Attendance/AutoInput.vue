@@ -49,8 +49,13 @@ export default {
   },
   methods: {
     submitAttendance: function () {
+      const toast = this.$swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+      })
       var pat = /\[\w+\]/g
-
       var match
       while ((match = pat.exec(this.attendanceStr)) !== null) {
         // perform decode and submit to backend
@@ -66,9 +71,16 @@ export default {
             }
             this.postAttendance(data)
           }
-          this.$swal(message.title, message.desc, message.status)
+          toast({
+            type: message.status,
+            title: `${message.title} - ${message.desc}`
+          })
         } catch (e) {
           console.log(e)
+          toast({
+            type: 'error',
+            title: '點名不成功 - 請輸入正確代碼'
+          })
         }
         this.attendanceStr = this.attendanceStr.replace(match[0], '')
       }
