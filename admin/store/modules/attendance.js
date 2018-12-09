@@ -8,10 +8,12 @@ export default {
   state: {},
   actions: {
     fetchAttendances: ({commit, getters}) => {
+      const maxAttendenceId = getters.getMaxAttendanceId
+      console.warn('current max attendence id', maxAttendenceId)
       return new Promise((resolve, reject) => {
-        return getAttendances(getters.getMaxAttendanceId).then((result) => {
+        return getAttendances(maxAttendenceId).then((result) => {
           _map(result.Attendance, (item, key) => {
-            commit('setAttendances', {key, item})
+            commit('setAttendances', {key: (key + maxAttendenceId), item})
           })
           return resolve(result)
         }).catch((err) => {
@@ -43,11 +45,12 @@ export default {
     getMaxAttendanceId: (state) => {
       let list = []
       _map(state, item => { list.push(item.attendance_id) })
-      return _max(list)
+      return _max(list) || 0
     }
   },
   mutations: {
     setAttendances: (state, {key, item}) => {
+      console.log('setAttendances', key, item)
       Vue.set(state, key, item)
     }
   }

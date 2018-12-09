@@ -34,7 +34,8 @@ export default {
   mixins: [ValidateSubmit],
   data () {
     return {
-      attendanceStr: ''
+      attendanceStr: '',
+      worshipId: ''
     }
   },
   computed: {
@@ -43,7 +44,7 @@ export default {
       getGroups: 'getGroups',
       getUsers: 'getUsers',
       getMembers: 'getMembers',
-      worshipId: 'getCurrentWorship'
+      getCurrentWorship: 'getCurrentWorship'
     })
   },
   methods: {
@@ -75,6 +76,11 @@ export default {
     ...mapActions({
       postAttendance: 'postAttendance'
     })
+  },
+  watch: {
+    getCurrentWorship (val) {
+      this.worshipId = val
+    }
   }
 }
 </script>

@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import _map from 'lodash/map'
 import _find from 'lodash/find'
-import { getWorship } from '../../api/worship'
+import { format } from 'date-fns'
+import { getWorship, postWorship } from '../../api/worship'
 
 export default {
   state: {},
@@ -17,7 +18,36 @@ export default {
           return reject(err)
         })
       })
-    }
+    },
+    postWorships: ({dispatch}) => {
+      const date = new Date()
+      const arr = [{
+        type: '早堂',
+        created_date: format(date, 'YYYY-MM-DD HH:mm:ss'),
+        date: format(date, 'YYYY-MM-DD')
+      }, {
+        type: '午堂',
+        created_date: format(date, 'YYYY-MM-DD HH:mm:ss'),
+        date: format(date, 'YYYY-MM-DD')
+      }]
+      console.log('postWorships', arr)
+      _map(arr, item => {
+        dispatch('postWorship', item)
+      })
+    },
+    postWorship: ({commit}, data) => {
+      console.log('postWorship', data)
+      return new Promise((resolve, reject) => {
+        return postWorship(data).then((result) => {
+          if (result >= 0) {
+            return resolve(true)
+          }
+          return false
+        }).catch((err) => {
+          return reject(err)
+        })
+      })
+    },
   },
   getters: {
     getWorships: (state) => {
