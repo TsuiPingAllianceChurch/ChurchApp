@@ -11,9 +11,15 @@
         <div class="row">
             <div class="col">
                 <div class="form-group">
-                    <vue-qr-reader
-                    :code-scanned="codeArrived"
-                    :stop-on-scanned="false"/>
+                    <vue-qr-reader ref="qr"
+                      v-on:code-scanned="codeArrived"
+                      :stop-on-scanned="false"
+                      :use-back-camera="true"
+                      :draw-on-found="true"
+                      :video-height="480"
+                      :video-width="640"
+                      :responsive="true">
+                    </vue-qr-reader>
                 </div>
             </div>
         </div>
@@ -48,24 +54,25 @@ export default {
   },
   methods: {
     codeArrived (code) {
+      console.log(code)
       const toast = this.$swal.mixin({
         toast: true,
         position: 'center',
         showConfirmButton: false,
         timer: 3000
       })
-
       var pat = /\[\w+\]/g
       var match
 
       if (!this.inprogress) {
         this.inprogress = true
 
-        while ((match = pat.exec(code)) !== null) {
-          // perform decode and submit to backend
-          try {
-            var search = decode(match[0].slice(1, -1))
-            if (search !== this.qrcode) {
+        if (this.qrcode !== code) {
+          this.qrcode = code
+          while ((match = pat.exec(code)) !== null) {
+            // perform decode and submit to backend
+            try {
+              var search = decode(match[0].slice(1, -1))
               console.log('search:' + search)
               const message = this.getSweetMessage(search, this.worshipId)
               if (message.status === 'success') {
@@ -75,20 +82,18 @@ export default {
                   created_date: format(new Date(), 'YYYY-MM-DD HH:mm:ss')
                 }
                 this.postAttendance(data)
-
-                this.qrcode = search
               }
               toast({
                 type: message.status,
                 title: `${message.title} - ${message.desc}`
               })
+            } catch (e) {
+              console.log(e)
+              toast({
+                type: 'error',
+                title: '點名不成功 - 請輸入正確代碼'
+              })
             }
-          } catch (e) {
-            console.log(e)
-            toast({
-              type: 'error',
-              title: '點名不成功 - 請輸入正確代碼'
-            })
           }
         }
         this.inprogress = false
