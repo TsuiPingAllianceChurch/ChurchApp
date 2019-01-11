@@ -14,7 +14,7 @@
                     <vue-qr-reader
                     :code-scanned="codeArrived"
                     :stop-on-scanned="false"
-                    :height="320" />
+                    :responsive="true" />
                 </div>
             </div>
         </div>
