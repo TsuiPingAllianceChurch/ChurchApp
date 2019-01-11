@@ -11,7 +11,10 @@
         <div class="row">
             <div class="col">
                 <div class="form-group">
-                    <vue-qr-reader v-on:code-scanned="codeArrived" :stop-on-scanned="false" />
+                    <vue-qr-reader
+                    :code-scanned="codeArrived"
+                    :stop-on-scanned="false"
+                    :height="320" />
                 </div>
             </div>
         </div>
