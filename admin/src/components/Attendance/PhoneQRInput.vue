@@ -13,8 +13,7 @@
                 <div class="form-group">
                     <vue-qr-reader
                     :code-scanned="codeArrived"
-                    :stop-on-scanned="false"
-                    :responsive="true" />
+                    :stop-on-scanned="false"/>
                 </div>
             </div>
         </div>
