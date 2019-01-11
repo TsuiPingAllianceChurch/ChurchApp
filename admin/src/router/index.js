@@ -4,6 +4,7 @@ import Home from '@/components/Home'
 import ManualAttend from '@/components/ManualAttend'
 import AutoAttend from '@/components/AutoAttend'
 import AttendanceCards from '@/components/Attendance/AttendanceCards'
+import PhoneAttend from '@/components/PhoneAttend'
 
 import Users from '@/components/Users'
 
@@ -35,6 +36,11 @@ export default new Router({
       path: '/users',
       name: 'Users',
       component: Users
+    },
+    {
+      path: '/phone_attend',
+      name: 'PhoneAttend',
+      component: PhoneAttend
     }
   ]
 })

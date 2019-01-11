@@ -33,6 +33,10 @@ export default {
         path: '/#/attendance',
         page: 'Attendance',
         text: '點名表'
+      }, {
+        path: '/#/phone_attend',
+        page: 'PhoneAttend',
+        text: '手機點名'
       }]
     }
   }

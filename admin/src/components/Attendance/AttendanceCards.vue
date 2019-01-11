@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-sm-2" v-for="(item, key) in attendanceList" :key="key">
+    <div class="col-sm-4 col-md-3" v-for="(item, key) in attendanceList" :key="key">
     <div class="card">
       <img class="card-img-top rounded-circle" :src=item.avator alt="Avator">
       <div class="card-body">
