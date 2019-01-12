@@ -2,14 +2,14 @@ import Vue from 'vue'
 import _map from 'lodash/map'
 import _find from 'lodash/find'
 import _max from 'lodash/max'
-import { getAttendances, postAttendances } from '../../api/attendance'
+import { getAttendances, postAttendances, deleteAttendance } from '../../api/attendance'
 
 export default {
   state: {},
   actions: {
     fetchAttendances: ({commit, getters}) => {
       const maxAttendenceId = getters.getMaxAttendanceId
-      console.warn('current max attendence id', maxAttendenceId)
+      //console.warn('current max attendence id', maxAttendenceId)
       return new Promise((resolve, reject) => {
         return getAttendances(maxAttendenceId).then((result) => {
           _map(result.Attendance, (item, key) => {
@@ -22,10 +22,24 @@ export default {
       })
     },
     postAttendance: ({commit}, data) => {
-      console.log('postAttendance', data)
+      //console.log('postAttendance', data)
       return new Promise((resolve, reject) => {
         return postAttendances(data).then((result) => {
           if (result >= 0) {
+            return resolve(true)
+          }
+          return false
+        }).catch((err) => {
+          return reject(err)
+        })
+      })
+    },
+    deleteAttendance: ({commit}, id) => {
+      //console.log('deleteAttendance', id)
+      return new Promise((resolve, reject) => {
+        return deleteAttendance(id).then((result) => {
+          if (result == 1) {
+            commit('removeAttendance', id)
             return resolve(true)
           }
           return false
@@ -50,8 +64,18 @@ export default {
   },
   mutations: {
     setAttendances: (state, {key, item}) => {
-      console.log('setAttendances', key, item)
+      //console.log('setAttendances', key, item)
       Vue.set(state, key, item)
+    },
+    removeAttendance: (state, id) => {
+      //console.log('removeAttendance', id)
+      for (var index in state) {
+        if (state.hasOwnProperty(index)) {
+          if (state[index].attendance_id == id) {
+            Vue.delete(state, index)
+          }
+        }
+      }
     }
   }
 }

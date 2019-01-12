@@ -7,6 +7,7 @@
         <th scope="col">Name</th>
         <th scope="col">Group</th>
         <th scope="col">Date</th>
+        <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
@@ -15,13 +16,14 @@
         <td>{{ item.userName }}</td>
         <td>{{ item.groupName }}</td>
         <td>{{ item.date }}</td>
+        <td><button v-on:click="delAttendance( item.attendanceId )">del</button></td>
       </tr>
     </tbody>
     </table>
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import _get from 'lodash/get'
 import _map from 'lodash/map'
 import _sortBy from 'lodash/sortBy'
@@ -49,6 +51,14 @@ export default {
       getUser: 'getUser',
       getMember: 'getMember',
       getAttendances: 'getAttendances'
+    })
+  },
+  methods: {
+    delAttendance: function (id) {
+      this.deleteAttendance(id)
+    },
+    ...mapActions({
+      deleteAttendance: 'deleteAttendance'
     })
   }
 }
