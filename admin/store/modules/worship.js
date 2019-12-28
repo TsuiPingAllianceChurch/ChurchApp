@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import _map from 'lodash/map'
 import _find from 'lodash/find'
+import _filter from 'lodash/filter'
 import { format } from 'date-fns'
 import { getWorship, postWorship } from '../../api/worship'
 
@@ -55,6 +56,10 @@ export default {
     },
     getWorship: (state) => (worshipId) => {
       return _find(state, {worship_id: worshipId})
+    },
+    getTodayWorship: (state) => {
+      const currentDay = format(new Date(), 'YYYY-MM-DD')
+      return _filter(state, {date: currentDay})
     }
   },
   mutations: {

@@ -1,6 +1,17 @@
 <template>
   <div class="user-table">
-    <div class="card" style="width: 18rem;" v-for="(item, key) in getUsers" :key="key" >
+    <div class="form-group row" style="width: 100%;">
+        <label for="group_name" class="col-sm-2 col-form-label">團契</label>
+        <div class="col-sm-4">
+            <select class="form-control" v-model="selectedGroup">
+                <option value="">-- 請選擇 --</option>
+                <option v-for="(group, key) in getGroups" :value="group.group_id" :key="key">{{ group['name_zh-hk'] }}</option>
+            </select>
+        </div>
+    </div>
+    <br/>
+
+    <div class="card" style="width: 18rem;" v-for="(item, key) in getUsers" :key="key" v-show="checkInGroup(item.user_id)" >
       <div class="card-wrapper">
         <qrcode-vue :value="item.qrcode" :size="200" level="H" class="card-img-top"></qrcode-vue>
         <div class="card-body">
@@ -15,20 +26,37 @@
 <script>
 import QrcodeVue from 'qrcode.vue'
 import { mapGetters } from 'vuex'
+import _map from 'lodash/map'
+import _indexOf from 'lodash/indexOf'
+
 export default {
   name: 'Home',
   data () {
     return {
-      info: null
+      info: null,
+      selectedGroup: ''
     }
   },
   computed: {
     ...mapGetters({
-      getUsers: 'getUsers'
+      getGroups: 'getGroups',
+      getUsers: 'getUsers',
+      getMembers: 'getMembers'
     })
   },
   components: {
     QrcodeVue
+  },
+  methods: {
+    checkInGroup (userId) {
+      let userList = []
+      _map(this.getMembers, member => {
+        if (member.group_id === this.selectedGroup) {
+          userList.push(member.user_id)
+        }
+      })
+      return _indexOf(userList, userId) !== -1
+    }
   }
 }
 </script>

@@ -11,7 +11,8 @@ export default {
       if (format(new Date(), 'HH:mm:ss') > '09:45') {
         type = '午堂'
       }
-      const worshipId = _get(_find(rootGetters.getWorships, {type}), 'worship_id')
+      const worshipId = _get(_find(rootGetters.getTodayWorship, {type}), 'worship_id')
+      console.log("worshipId: " + worshipId);
       commit('setCurrentWorship', {key: 'currentWorshipId', item: worshipId})
     }
   },

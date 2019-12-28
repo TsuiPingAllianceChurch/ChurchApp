@@ -14,15 +14,24 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getCurrentWorship: 'getCurrentWorship'
+      getCurrentWorship: 'getCurrentWorship',
+      getTodayWorship: 'getTodayWorship'
     })
   },
   methods: {
-    IsPostWorship () {
-      if (!this.getCurrentWorship) {
-        console.log('need to post worship')
-        this.postWorships()
-      }
+    fetchAndUpdateCurrentWorship () {
+      this.fetchWorship().then((result) => {
+        if (this.getTodayWorship.length === 0) {
+          this.postWorships().then(() => {
+            console.log('postWorships done')
+            setTimeout(() => {
+              this.fetchAndUpdateCurrentWorship()
+            }, 5000)
+          })
+        } else {
+          this.updateCurrentWorship()
+        }
+      })
     },
     ...mapActions({
       fetchUsers: 'fetchUsers',
@@ -36,7 +45,7 @@ export default {
   },
   mounted () {
     this.fetchUsers()
-    this.fetchWorship()
+    this.fetchAndUpdateCurrentWorship()
     this.fetchGroups()
     this.fetchMembers()
     const self = this
@@ -44,16 +53,9 @@ export default {
       // fetchAttendances will only retrieve new data
       self.fetchAttendances()
     }, 5000)
-    setTimeout(() => {
-      self.updateCurrentWorship()
-    }, 5000)
-    setTimeout(() => {
-      self.IsPostWorship()
-    }, 10000)
     setInterval(() => {
-      self.updateCurrentWorship()
-      self.IsPostWorship()
-    }, 900000) // 15 mins
+      self.fetchAndUpdateCurrentWorship()
+    }, 900000) // 15 mins 900000
   }
 }
 </script>

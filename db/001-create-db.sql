@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS `Group` (
 CREATE TABLE IF NOT EXISTS Group_Member (
     group_id INT NOT NULL,
     user_id INT NOT NULL,
+    group_seq_num INT NULL,
     created_date DATETIME NOT NULL
 )  ENGINE=INNODB;
 

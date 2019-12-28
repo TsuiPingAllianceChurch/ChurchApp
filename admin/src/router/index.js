@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Home from '@/components/Home'
 import ManualAttend from '@/components/ManualAttend'
 import AutoAttend from '@/components/AutoAttend'
-import AttendanceCards from '@/components/Attendance/AttendanceCards'
+import AttendanceListByGroup from '@/components/Attendance/AttendanceListByGroup'
 import PhoneAttend from '@/components/PhoneAttend'
 
 import Users from '@/components/Users'
@@ -29,8 +29,8 @@ export default new Router({
     },
     {
       path: '/attendance',
-      name: 'AttendanceCards',
-      component: AttendanceCards
+      name: 'AttendanceListByGroup',
+      component: AttendanceListByGroup
     },
     {
       path: '/users',
