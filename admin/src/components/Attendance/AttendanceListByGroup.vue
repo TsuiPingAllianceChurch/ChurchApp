@@ -32,7 +32,7 @@
           </thead>
           <tbody>
             <tr v-for="(user, key) in getUsers" v-show="checkInGroup(user.user_id)"  :key="key">
-              <td scope="row">{{ user.user_id }} </td>
+              <td scope="row">{{ getGroupNum(user.user_id) }} </td>
               <td>{{ user.name_en }}</td>
               <td>{{ user['name_zh-hk'] }}</td>
               <td>{{ checkAttend(user.user_id) }}</td>
@@ -85,6 +85,12 @@ export default {
         }
       })
       return _indexOf(userList, userId) !== -1
+    },
+    getGroupNum (userId) {
+      let item = _find(this.getMembers, {group_id: this.selectedGroup, user_id: userId})
+      if (item) {
+        return item.group_seq_num
+      }
     },
     checkAttend (userId) {
       let worship1 = _find(this.getWorships, {date: this.worshipDate, type: '早堂'})
