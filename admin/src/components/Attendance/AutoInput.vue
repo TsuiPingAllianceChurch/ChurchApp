@@ -13,7 +13,6 @@
                 <div class="form-group">
                     <textarea
                         v-model="attendanceStr"
-                        v-on:keyup="submitAttendance"
                         class="form-control"
                         id="autoAttendInput"
                         rows="10"></textarea>
@@ -92,6 +91,11 @@ export default {
   watch: {
     getCurrentWorship (val) {
       this.worshipId = val
+    },
+    attendanceStr: function (val) {
+      if (/\[\w+\]/.test(val)) {
+        this.submitAttendance()
+      }
     }
   }
 }
