@@ -15,7 +15,7 @@
       <div class="card-wrapper">
         <qrcode-vue :value="item.qrcode" :size="160" level="H" class="card-img-top"></qrcode-vue>
         <div class="card-body">
-          <h5 class="card-title">{{ item['user_id'] }}. {{ item['name_zh-hk'] }}</h5>
+          <h5 class="card-title"><router-link :to="{ name: 'Profile', params: { id: item['user_id'] }}">{{ item['name_zh-hk'] }}</router-link></h5>
           <!-- <p class="card-text">{{ item['user_id'] }}</p> -->
         </div>
       </div>
@@ -73,5 +73,8 @@ export default {
 }
 .user-table .card .card-wrapper {
   margin: 20px;
+}
+a:link {
+  text-decoration: none;
 }
 </style>
