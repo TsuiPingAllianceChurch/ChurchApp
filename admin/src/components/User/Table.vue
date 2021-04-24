@@ -15,7 +15,7 @@
       <div class="card-wrapper">
         <qrcode-vue :value="item.qrcode" :size="160" level="H" class="card-img-top"></qrcode-vue>
         <div class="card-body">
-          <h5 class="card-title">{{ item['name_zh-hk'] }}</h5>
+          <h5 class="card-title">{{ item['user_id'] }}. {{ item['name_zh-hk'] }}</h5>
           <!-- <p class="card-text">{{ item['user_id'] }}</p> -->
         </div>
       </div>
