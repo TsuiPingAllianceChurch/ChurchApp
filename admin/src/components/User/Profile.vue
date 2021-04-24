@@ -1,6 +1,6 @@
 <template>
   <div id="profile">
-    <qrcode-vue :value="item.qrcode" :size="160" level="H" class="card-img-top"></qrcode-vue>
+    <qrcode-vue :value="item.qrcode" :size="250" level="H" class="card-img-top"></qrcode-vue>
     <div class="card-body">
       <h5 class="card-title">{{ item['name_zh-hk'] }}</h5>
     </div>
@@ -29,7 +29,7 @@ export default {
   mounted: function () {
     setTimeout(() => {
       this.item = this.getUser(parseInt(this.$route.params.id))
-    }, 1000)
+    }, 800)
   }
 }
 </script>
