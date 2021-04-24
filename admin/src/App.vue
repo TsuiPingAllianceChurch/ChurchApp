@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <navbar></navbar>
+    <navbar v-if="!['Profile'].includes($route.name)" />
     <router-view/>
   </div>
 </template>

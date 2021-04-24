@@ -7,6 +7,7 @@ import AttendanceListByGroup from '@/components/Attendance/AttendanceListByGroup
 import PhoneAttend from '@/components/PhoneAttend'
 
 import Users from '@/components/Users'
+import Profile from '@/components/User/Profile'
 
 Vue.use(Router)
 
@@ -36,6 +37,11 @@ export default new Router({
       path: '/users',
       name: 'Users',
       component: Users
+    },
+    {
+      path: '/profile/:id',
+      name: 'Profile',
+      component: Profile
     },
     {
       path: '/phone_attend',
