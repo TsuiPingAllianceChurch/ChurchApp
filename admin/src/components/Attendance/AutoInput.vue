@@ -46,6 +46,11 @@ export default {
       getCurrentWorship: 'getCurrentWorship'
     })
   },
+  mounted: function () {
+    setInterval(() => {
+      document.getElementById('autoAttendInput').focus()
+    }, 4000)
+  },
   methods: {
     submitAttendance: function () {
       const toast = this.$swal.mixin({
