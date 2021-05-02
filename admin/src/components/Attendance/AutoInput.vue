@@ -2,7 +2,7 @@
     <form>
         <div class="row">
             <div class="col-3">
-                <select class="form-control" v-model="worshipId">
+                <select class="form-control" v-model="worshipId" v-on:change="focusInput()">
                     <option value="">-- 請選擇 --</option>
                     <option v-for="(worship, key) in getTodayWorship" :value="worship.worship_id" :key="key">{{ worship.type }}</option>
                 </select>
@@ -47,9 +47,8 @@ export default {
     })
   },
   mounted: function () {
-    setInterval(() => {
-      document.getElementById('autoAttendInput').focus()
-    }, 4000)
+    this.worshipId = this.getCurrentWorship
+    this.focusInput()
   },
   methods: {
     submitAttendance: function () {
@@ -88,6 +87,9 @@ export default {
         }
         this.attendanceStr = this.attendanceStr.replace(match[0], '')
       }
+    },
+    focusInput: function () {
+      document.getElementById('autoAttendInput').focus()
     },
     ...mapActions({
       postAttendance: 'postAttendance'

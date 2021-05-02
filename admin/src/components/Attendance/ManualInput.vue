@@ -1,11 +1,21 @@
 <template>
     <form>
         <div class="form-group row">
+            <label for="worship_type" class="col-sm-2 col-form-label">日期</label>
+            <div class="col-sm-4">
+                <select class="form-control" v-model="selectedWorshipDate">
+                    <option value="">-- 請選擇 --</option>
+                    <option v-for="(date) in getWorshipDate" :value="date" :key="date">{{ date }}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
             <label for="worship_type" class="col-sm-2 col-form-label">崇拜</label>
             <div class="col-sm-4">
                 <select class="form-control" v-model="selectedWorship">
                     <option value="">-- 請選擇 --</option>
-                    <option v-for="(worship, key) in getTodayWorship" :value="worship.worship_id" :key="key">{{ worship.type }}</option>
+                    <option v-for="(worship, key) in getWorshipByDate" :value="worship.worship_id" :key="key">{{ worship.type }}</option>
                 </select>
             </div>
         </div>
@@ -37,6 +47,8 @@
 import { mapGetters, mapActions } from 'vuex'
 import _map from 'lodash/map'
 import _indexOf from 'lodash/indexOf'
+import _uniq from 'lodash/uniq'
+import _filter from 'lodash/filter'
 import { format } from 'date-fns'
 import ValidateSubmit from '../../mixins/ValidateSubmit'
 
@@ -45,22 +57,29 @@ export default {
   mixins: [ValidateSubmit],
   data () {
     return {
+      selectedWorshipDate: '',
       selectedGroup: '',
       selectedUser: '',
       selectedWorship: ''
     }
   },
   computed: {
+    getWorshipDate () {
+      return _uniq(_map(this.getWorships, 'date'))
+    },
+    getWorshipByDate () {
+      return _filter(this.getWorships, {date: this.selectedWorshipDate})
+    },
     ...mapGetters({
       getAttendances: 'getAttendances',
       getAttendance: 'getAttendance',
       getTodayWorship: 'getTodayWorship',
+      getWorships: 'getWorships',
       getWorship: 'getWorship',
       getGroups: 'getGroups',
       getUsers: 'getUsers',
       getUser: 'getUser',
-      getMembers: 'getMembers',
-      getCurrentWorship: 'getCurrentWorship'
+      getMembers: 'getMembers'
     })
   },
   methods: {
@@ -91,11 +110,6 @@ export default {
     ...mapActions({
       postAttendance: 'postAttendance'
     })
-  },
-  watch: {
-    getCurrentWorship (val) {
-      this.selectedWorship = val
-    }
   }
 }
 </script>
