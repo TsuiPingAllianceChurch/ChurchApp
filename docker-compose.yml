@@ -22,7 +22,7 @@ services:
       - frontend
       - backend
     ports:
-      - "8001:80"
+      - "9001:80"
     volumes:
       - ./api/:/var/www/html/
     container_name: tpac_apache
@@ -32,7 +32,7 @@ services:
     networks:
       - frontend
     ports:
-      - "8002:8080"
+      - "9002:8080"
     container_name: tpac_admin
   tpac_db:
     image: mysql:${MYSQL_VERSION:-latest}
@@ -45,6 +45,15 @@ services:
       - ./mysql.cnf:/etc/mysql/conf.d/mysql.cnf
       - ./db:/docker-entrypoint-initdb.d
       - dbdata:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    networks:
+      - backend
+    ports:
+      - 9080:80
+    environment:
+      - PMA_ARBITRARY=1
 networks:
   frontend:
   backend:
