@@ -56,7 +56,8 @@ export default {
         toast: true,
         position: 'top-end',
         showConfirmButton: false,
-        timer: 3000
+        timer: 5000,
+        padding: '2rem'
       })
       var pat = /\[\w+\]/g
       var match
@@ -107,3 +108,11 @@ export default {
   }
 }
 </script>
+
+<style>
+
+.swal2-header {
+  font-size: 2rem;
+}
+
+</style>
