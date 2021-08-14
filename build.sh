@@ -5,9 +5,8 @@ docker-compose down --remove-orphans
 
 cd admin
 
-docker build -t churchapp_tpac_admin .
+docker build -t tpac_admin .
 
 cd ..
 
-##docker-compose up -d
-docker-compose -f docker-compose-php7.yml up -d
+docker-compose up -d

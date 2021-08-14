@@ -2,30 +2,19 @@ version: "3.2"
 services:
   php:
     build: 
-      context: './php/'
-      args:
-        PHP_VERSION: ${PHP_VERSION}
-    networks:
-      - backend
-    volumes:
-      - ./api/:/var/www/html/
-    container_name: tpac_api
-  apache:
-    build:
-      context: './apache/'
-      args:
-       APACHE_VERSION: ${APACHE_VERSION}
+      context: './'
+      dockerfile: /home/albert/projects/ChurchApp/Dockerfile-php2
+    ports:
+      - "9001:80"
     depends_on:
-      - php 
       - tpac_db 
     networks:
       - frontend
       - backend
-    ports:
-      - "9001:80"
     volumes:
       - ./api/:/var/www/html/
-    container_name: tpac_apache
+    container_name: tpac_api
+
   tpac_admin:
     build:
       context: './admin/'
@@ -34,6 +23,7 @@ services:
     ports:
       - "9002:8080"
     container_name: tpac_admin
+
   tpac_db:
     image: mysql:${MYSQL_VERSION:-latest}
     networks:
@@ -45,6 +35,7 @@ services:
       - ./mysql.cnf:/etc/mysql/conf.d/mysql.cnf
       - ./db:/docker-entrypoint-initdb.d
       - dbdata:/var/lib/mysql
+
   phpmyadmin:
     image: phpmyadmin
     restart: always
