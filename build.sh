@@ -9,4 +9,5 @@ docker build -t churchapp_tpac_admin .
 
 cd ..
 
-docker-compose up -d
+##docker-compose up -d
+docker-compose -f docker-compose-php7.yml up -d
