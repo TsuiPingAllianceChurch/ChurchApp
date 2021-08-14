@@ -30,6 +30,10 @@ export default {
         type: '午堂',
         created_date: format(date, 'YYYY-MM-DD HH:mm:ss'),
         date: format(date, 'YYYY-MM-DD')
+      }, {
+        type: '網上',
+        created_date: format(date, 'YYYY-MM-DD HH:mm:ss'),
+        date: format(date, 'YYYY-MM-DD')
       }]
       console.log('postWorships', arr)
       _map(arr, item => {
