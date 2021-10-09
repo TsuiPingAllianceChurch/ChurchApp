@@ -1,21 +1,28 @@
 <template>
-    <form>
+    <div class="container-fluid">
         <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <vue-qr-reader ref="qr"
-                      v-on:code-scanned="codeArrived"
-                      :stop-on-scanned="false"
-                      :use-back-camera="true"
-                      :draw-on-found="true"
-                      :video-height="480"
-                      :video-width="640"
-                      :responsive="true">
-                    </vue-qr-reader>
-                </div>
+            <!--Main Content-->
+            <div class="col-lg-12 col-lg-push-12">
+                <form>
+                  <div class="row">
+                      <div class="col">
+                          <div class="form-group">
+                              <vue-qr-reader ref="qr"
+                                v-on:code-scanned="codeArrived"
+                                :stop-on-scanned="false"
+                                :use-back-camera="true"
+                                :draw-on-found="true"
+                                :video-height="480"
+                                :video-width="640"
+                                :responsive="true">
+                              </vue-qr-reader>
+                          </div>
+                      </div>
+                  </div>
+              </form>
             </div>
         </div>
-    </form>
+    </div>
 </template>
 
 <script>
