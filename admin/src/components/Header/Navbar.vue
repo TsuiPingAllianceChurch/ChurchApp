@@ -34,9 +34,9 @@ export default {
         page: 'Attendance',
         text: '點名表'
       }, {
-        path: '/#/phone_attend',
-        page: 'PhoneAttend',
-        text: '手機點名'
+        path: '/#/qr_check',
+        page: 'QRCheck',
+        text: 'QR check'
       }]
     }
   }
