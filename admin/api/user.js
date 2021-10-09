@@ -7,3 +7,11 @@ export const getUsers = async () => {
     })
   })
 }
+
+export const postUser = async (data) => {
+  return new Promise((resolve, reject) => {
+    axios.post('https://tpac-api.homeip.net/api.php/User', data).then(response => {
+      return resolve(response.data)
+    })
+  })
+}
