@@ -5,6 +5,8 @@ import ManualAttend from '@/components/ManualAttend'
 import AutoAttend from '@/components/AutoAttend'
 import AttendanceListByGroup from '@/components/Attendance/AttendanceListByGroup'
 import PhoneAttend from '@/components/PhoneAttend'
+import QRCheck from '@/components/QRCheck'
+
 
 import Users from '@/components/Users'
 import Profile from '@/components/User/Profile'
@@ -47,6 +49,11 @@ export default new Router({
       path: '/phone_attend',
       name: 'PhoneAttend',
       component: PhoneAttend
+    },
+    {
+      path: '/qr_check',
+      name: 'QRCheck',
+      component: QRCheck
     }
   ]
 })
