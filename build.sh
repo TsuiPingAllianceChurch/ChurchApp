@@ -1,4 +1,4 @@
-git reset --hard
+## git reset --hard
 git pull
 
 docker-compose down --remove-orphans
