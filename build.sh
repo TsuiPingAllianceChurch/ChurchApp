@@ -3,10 +3,10 @@ git pull
 
 docker-compose down --remove-orphans
 
-cd admin
+docker-compose build
 
-docker build -t tpac_admin .
-
-cd ..
+## cd admin
+## docker build -t tpac_admin .
+## cd ..
 
 docker-compose up -d
