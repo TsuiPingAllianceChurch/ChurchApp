@@ -6,8 +6,6 @@ import AutoAttend from '@/components/AutoAttend'
 import AttendanceListByGroup from '@/components/Attendance/AttendanceListByGroup'
 import PhoneAttend from '@/components/PhoneAttend'
 import QRCheck from '@/components/QRCheck'
-
-
 import Users from '@/components/Users'
 import Profile from '@/components/User/Profile'
 

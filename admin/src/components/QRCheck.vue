@@ -19,11 +19,8 @@
 </template>
 
 <script>
-import { format } from 'date-fns'
-import { decode } from '../../util/AESUtils'
+import { decode } from '../util/AESUtils'
 import VueQrReader from 'vue-qr-reader/dist/lib/vue-qr-reader.umd.js'
-
-
 
 export default {
   name: 'QRCheck',
@@ -69,7 +66,7 @@ export default {
           }
         }
       }
-    },
+    }
   }
 }
 </script>
