@@ -51,7 +51,7 @@
 import { mapGetters } from 'vuex'
 import { decode } from '../util/AESUtils'
 import VueQrReader from 'vue-qr-reader/dist/lib/vue-qr-reader.umd.js'
-import { postUser } from '../../api/user'
+import { postUser, updateUser } from '../../api/user'
 import { postMember, deleteMember } from '../../api/member'
 
 export default {
@@ -134,37 +134,66 @@ export default {
       console.log(this.name)
       console.log(this.selectedGroup)
 
-      const newUser = {
-        user_id: this.userid,
-        'name_zh-hk': this.name
-      }
       const newGroupMember = {
         group_id: this.selectedGroup,
         user_id: this.userid,
         group_seq_num: 0
       }
-      postUser(newUser).then((result) => {
-        if (result >= 0) {
-          for (const idx in this.foundGroups) {
-            console.log(this.foundGroups[idx])
-            deleteMember(this.foundGroups[idx])
-          }
-          postMember(newGroupMember).then((result) => {
-            console.log(result)
-            toast({
-              type: 'success',
-              title: `${this.name} - saved`
+
+      // existing user
+      if (this.user) {
+        this.user['name_zh-hk'] = this.name
+        updateUser(this.user).then((result) => {
+          if (result >= 0) {
+            for (const idx in this.foundGroups) {
+              console.log(this.foundGroups[idx])
+              deleteMember(this.foundGroups[idx])
+            }
+            postMember(newGroupMember).then((result) => {
+              console.log(result)
+              toast({
+                type: 'success',
+                title: `${this.name} - updated`
+              })
             })
+          }
+          return false
+        }).catch((err) => {
+          console.log(err)
+          toast({
+            type: 'error',
+            title: `${this.name} - failed`
           })
-        }
-        return false
-      }).catch((err) => {
-        console.log(err)
-        toast({
-          type: 'error',
-          title: `${this.name} - failed`
         })
-      })
+      } else {
+        // new user
+        const newUser = {
+          user_id: this.userid,
+          'name_zh-hk': this.name
+        }
+        postUser(newUser).then((result) => {
+          if (result >= 0) {
+            for (const idx in this.foundGroups) {
+              console.log(this.foundGroups[idx])
+              deleteMember(this.foundGroups[idx])
+            }
+            postMember(newGroupMember).then((result) => {
+              console.log(result)
+              toast({
+                type: 'success',
+                title: `${this.name} - saved`
+              })
+            })
+          }
+          return false
+        }).catch((err) => {
+          console.log(err)
+          toast({
+            type: 'error',
+            title: `${this.name} - failed`
+          })
+        })
+      }
     }
   }
 }

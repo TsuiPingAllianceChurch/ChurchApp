@@ -15,3 +15,11 @@ export const postUser = async (data) => {
     })
   })
 }
+
+export const updateUser = async (data) => {
+  return new Promise((resolve, reject) => {
+    axios.put('https://tpac-api.homeip.net/api.php/User/' + data.user_id, data).then(response => {
+      return resolve(response.data)
+    })
+  })
+}
