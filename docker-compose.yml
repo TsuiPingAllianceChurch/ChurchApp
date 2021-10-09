@@ -2,8 +2,7 @@ version: "3.2"
 services:
   php:
     build: 
-      context: './'
-      dockerfile: /home/albert/projects/ChurchApp/Dockerfile-php2
+      context: './php'
     ports:
       - "9001:80"
     depends_on:
