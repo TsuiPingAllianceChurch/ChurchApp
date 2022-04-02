@@ -43,7 +43,9 @@ export default {
       getGroups: 'getGroups',
       getUsers: 'getUsers',
       getMembers: 'getMembers',
-      getCurrentWorship: 'getCurrentWorship'
+      getCurrentWorship: 'getCurrentWorship',
+      getMappings: 'getMappings',
+      getMapping: 'getMapping'
     })
   },
   mounted: function () {
@@ -89,6 +91,43 @@ export default {
         this.attendanceStr = this.attendanceStr.replace(match[0], '')
       }
     },
+    submitVaccineRecord: function () {
+      const toast = this.$swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 5000,
+        padding: '2rem'
+      })
+      var vrecordstr = this.attendanceStr
+      var vrecord = vrecordstr.split('|')
+      var mappingstr = vrecord[5] + '|' + vrecord[6]
+      try {
+        var userid = this.getMapping(mappingstr).user_id
+        console.log(userid)
+        const message = this.getSweetMessage(userid, this.worshipId)
+        if (message.status === 'success') {
+          const data = {
+            user_id: userid,
+            worship_id: this.worshipId,
+            created_date: format(new Date(), 'YYYY-MM-DD HH:mm:ss')
+          }
+          this.postAttendance(data)
+        }
+        toast({
+          type: message.status,
+          title: `${message.title} - ${message.desc}`
+        })
+      } catch (e) {
+        console.log(e)
+        toast({
+          type: 'error',
+          title: '點名不成功 - 請輸入正確代碼'
+        })
+      }
+
+      this.attendanceStr = this.attendanceStr.replace(vrecordstr, '')
+    },
     focusInput: function () {
       document.getElementById('autoAttendInput').focus()
     },
@@ -101,8 +140,13 @@ export default {
       this.worshipId = val
     },
     attendanceStr: function (val) {
+      // matching first type of pattern [1123123132]
       if (/\[\w+\]/.test(val)) {
         this.submitAttendance()
+      }
+      // matching second type of pattern XXXXXXXX=
+      if (/HKSARG|VAC\w+=/.test(val)) {
+        this.submitVaccineRecord()
       }
     }
   }

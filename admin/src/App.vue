@@ -35,6 +35,7 @@ export default {
     },
     ...mapActions({
       fetchUsers: 'fetchUsers',
+      fetchMappings: 'fetchMappings',
       fetchWorship: 'fetchWorship',
       fetchGroups: 'fetchGroups',
       fetchMembers: 'fetchMembers',
@@ -45,6 +46,7 @@ export default {
   },
   mounted () {
     this.fetchUsers()
+    this.fetchMappings()
     this.fetchAndUpdateCurrentWorship()
     this.fetchGroups()
     this.fetchMembers()

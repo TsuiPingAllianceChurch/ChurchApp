@@ -7,6 +7,7 @@ import header from './modules/header'
 import member from './modules/member'
 import attendance from './modules/attendance'
 import metadata from './modules/metadata'
+import mapping from './modules/mapping'
 
 Vue.use(Vuex)
 
@@ -19,7 +20,8 @@ export function createStore () {
       header,
       member,
       attendance,
-      metadata
+      metadata,
+      mapping
     }
   })
 }
