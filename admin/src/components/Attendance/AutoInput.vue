@@ -10,9 +10,9 @@
         </div>
         <div class="row">
             <div class="col">
-                <div class="form-group">
+                <div class="form-group" >
                     <textarea
-                        v-model="attendanceStr"
+                        v-model.lazy="attendanceStr"
                         class="form-control"
                         id="autoAttendInput"
                         rows="10"></textarea>
@@ -23,10 +23,12 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
-import { format } from 'date-fns'
-import { decode } from '../../util/AESUtils'
+/* eslint-disable */
+import { mapGetters } from 'vuex'
+import _map from 'lodash/map'
+import { convert } from '../../util/QRConvert'
 import ValidateSubmit from '../../mixins/ValidateSubmit'
+import { getMappings, getGroupUsers } from '../../../api/user'
 
 export default {
   name: 'auto-input',
@@ -34,7 +36,10 @@ export default {
   data () {
     return {
       attendanceStr: '',
-      worshipId: ''
+      oldAttendanceStr: '',
+      worshipId: '',
+      userMappings: [],
+      groupUsers: {}
     }
   },
   computed: {
@@ -43,111 +48,82 @@ export default {
       getGroups: 'getGroups',
       getUsers: 'getUsers',
       getMembers: 'getMembers',
-      getCurrentWorship: 'getCurrentWorship',
-      getMappings: 'getMappings',
-      getMapping: 'getMapping'
+      getCurrentWorship: 'getCurrentWorship'
     })
   },
   mounted: function () {
     this.worshipId = this.getCurrentWorship
     this.focusInput()
+    this.clearInvalidInput()
+    this.fetchUserMappings()
+    this.fetchGroupUsers()
+  },
+  created: function () {
+    window.addEventListener('keydown', this.appendChar)
   },
   methods: {
-    submitAttendance: function () {
-      const toast = this.$swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 5000,
-        padding: '2rem'
-      })
-      var pat = /\[\w+\]/g
-      var match
-      while ((match = pat.exec(this.attendanceStr)) !== null) {
-        // perform decode and submit to backend
-        try {
-          var search = decode(match[0].slice(1, -1))
-          console.log('search:' + search)
-          const message = this.getSweetMessage(search, this.worshipId)
-          if (message.status === 'success') {
-            const data = {
-              user_id: search,
-              worship_id: this.worshipId,
-              created_date: format(new Date(), 'YYYY-MM-DD HH:mm:ss')
-            }
-            this.postAttendance(data)
-          }
-          toast({
-            type: message.status,
-            title: `${message.title} - ${message.desc}`
-          })
-        } catch (e) {
-          console.log(e)
-          toast({
-            type: 'error',
-            title: '點名不成功 - 請輸入正確代碼'
-          })
-        }
-        this.attendanceStr = this.attendanceStr.replace(match[0], '')
+    appendChar (e) {
+      if (e.key.length === 1) {
+        this.attendanceStr += e.key
       }
     },
-    submitVaccineRecord: function () {
-      const toast = this.$swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 5000,
-        padding: '2rem'
-      })
-      var vrecordstr = this.attendanceStr
-      var vrecord = vrecordstr.split('|')
-      var mappingstr = vrecord[5] + '|' + vrecord[6]
-      try {
-        var userid = this.getMapping(mappingstr).user_id
-        console.log(userid)
-        const message = this.getSweetMessage(userid, this.worshipId)
-        if (message.status === 'success') {
-          const data = {
-            user_id: userid,
-            worship_id: this.worshipId,
-            created_date: format(new Date(), 'YYYY-MM-DD HH:mm:ss')
-          }
-          this.postAttendance(data)
+    clearInvalidInput: function () {
+      var self = this
+      setInterval(function () {
+        if (self.attendanceStr === self.oldAttendanceStr) {
+          self.attendanceStr = ''
+          self.oldAttendanceStr = ''
+        } else {
+          self.oldAttendanceStr = self.attendanceStr
         }
-        toast({
-          type: message.status,
-          title: `${message.title} - ${message.desc}`
+      }, 1000)
+    },
+    fetchUserMappings: function () {
+      getMappings().then((result) => {
+        _map(result.User_Mapping, (item, key) => {
+          this.userMappings.push(item)
         })
-      } catch (e) {
-        console.log(e)
-        toast({
-          type: 'error',
-          title: '點名不成功 - 請輸入正確代碼'
+      })
+    },
+    fetchGroupUsers: function () {
+      getGroupUsers().then((result) => {
+        var target = {}; result.records.forEach(function(key) {
+          var users = {}; key.User.forEach(function(item) {
+            users[item['user_id']] = item['name_zh-hk']
+          })
+          target[key['name_zh-hk']] = users
         })
-      }
-
-      this.attendanceStr = this.attendanceStr.replace(vrecordstr, '')
+        console.log(target)
+        this.groupUsers = target
+      })
     },
     focusInput: function () {
-      document.getElementById('autoAttendInput').focus()
-    },
-    ...mapActions({
-      postAttendance: 'postAttendance'
-    })
+      // document.getElementById('autoAttendInput').focus()
+    }
   },
   watch: {
     getCurrentWorship (val) {
       this.worshipId = val
     },
     attendanceStr: function (val) {
+      var obj = convert(val, this.userMappings)
+      if (obj) {
+        if (obj.type === 'vaccine_qr' && !obj.found) {
+          console.log('handleMissingMapping')
+          obj.userid = this.handleMissingMapping(obj, this.groupUsers)
+        } else {
+          this.submitUser(obj)
+        }
+      }
+
       // matching first type of pattern [1123123132]
-      if (/\[\w+\]/.test(val)) {
-        this.submitAttendance()
-      }
-      // matching second type of pattern XXXXXXXX=
-      if (/HKSARG|VAC\w+=/.test(val)) {
-        this.submitVaccineRecord()
-      }
+      // if (/\[\w+\]/.test(val)) {
+      //   this.submitAttendance()
+      // }
+      // // matching second type of pattern XXXXXXXX=
+      // if (/HKSARG|VAC\w+=/.test(val)) {
+      //   this.submitVaccineRecord()
+      // }
     }
   }
 }

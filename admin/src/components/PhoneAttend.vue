@@ -7,9 +7,9 @@
             </div>
 
             <!--Sidebar-->
-            <div class="col-lg-6 col-lg-pull-6">
+            <!-- <div class="col-lg-6 col-lg-pull-6">
                 <attendance-list></attendance-list>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
@@ -18,7 +18,7 @@
 export default {
   name: 'PhoneAttend',
   components: {
-    'attendance-phone': () => import(/* webpackChunkName: "PhoneAttend" */ './Attendance/PhoneQRInput'),
+    'attendance-phone': () => import(/* webpackChunkName: "PhoneAttend" */ './Attendance/HTML5QRInput'),
     'attendance-list': () => import(/* webpackChunkName: "Attendance" */ './Attendance/AttendanceList')
   }
 }

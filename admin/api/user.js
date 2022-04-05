@@ -31,3 +31,19 @@ export const getMappings = async () => {
     })
   })
 }
+
+export const postMapping = async (data) => {
+  return new Promise((resolve, reject) => {
+    axios.post('https://tpac-api.homeip.net/api.php/User_Mapping', data).then(response => {
+      return resolve(response.data)
+    })
+  })
+}
+
+export const getGroupUsers = async () => {
+  return new Promise((resolve, reject) => {
+    axios.get('https://app.ccstation.cc/attendance/api_v2.php/records/Group?join=User').then(response => {
+      return resolve(response.data)
+    })
+  })
+}

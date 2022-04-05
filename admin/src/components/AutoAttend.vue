@@ -5,9 +5,11 @@
             <div class="col-lg-6 col-lg-push-6">
                 <attendance-auto></attendance-auto>
             </div>
+        </div>
+        <div class="row">
 
             <!--Sidebar-->
-            <div class="col-lg-6 col-lg-pull-6">
+            <div class="col-lg-9 col-lg-pull-9">
                 <attendance-list></attendance-list>
             </div>
         </div>

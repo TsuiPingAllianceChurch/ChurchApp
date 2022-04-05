@@ -6,6 +6,7 @@ import App from './App'
 import router from './router'
 
 import { createStore } from '../store/index'
+import 'sweetalert2/dist/sweetalert2.min.css'
 
 const store = createStore()
 

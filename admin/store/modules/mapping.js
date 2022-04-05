@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import _map from 'lodash/map'
 import _find from 'lodash/find'
-import { getMappings } from '../../api/user'
+import { getMappings, postMapping } from '../../api/user'
 
 export default {
   state: {},
@@ -17,7 +17,20 @@ export default {
           return reject(err)
         })
       })
-    }
+    },
+    postMapping: ({commit}, data) => {
+      //console.log('postAttendance', data)
+      return new Promise((resolve, reject) => {
+        return postMapping(data).then((result) => {
+          if (result >= 0) {
+            return resolve(true)
+          }
+          return false
+        }).catch((err) => {
+          return reject(err)
+        })
+      })
+    },
   },
   getters: {
     getMappings: (state) => {
