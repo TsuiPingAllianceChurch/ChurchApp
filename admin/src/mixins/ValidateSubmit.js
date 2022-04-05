@@ -29,7 +29,6 @@ export default {
           })
           target[key['name_zh-hk']] = users
         })
-        console.log(target)
         this.groupUsers = target
       })
     },
@@ -103,11 +102,11 @@ export default {
     },
     async handleMissingMapping (obj, groupUsers) {
       console.log(obj)
+      console.log(groupUsers)
       const toast = this.$swal.mixin({
         toast: true,
         position: 'center',
         showConfirmButton: false,
-        timer: 5000,
         padding: '1rem'
       })
       const { value: userid } = await toast.fire({
