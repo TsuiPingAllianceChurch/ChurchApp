@@ -23,12 +23,9 @@
 </template>
 
 <script>
-/* eslint-disable */
 import { mapGetters } from 'vuex'
-import _map from 'lodash/map'
 import { convert } from '../../util/QRConvert'
 import ValidateSubmit from '../../mixins/ValidateSubmit'
-import { getMappings, getGroupUsers } from '../../../api/user'
 
 export default {
   name: 'auto-input',
@@ -78,25 +75,6 @@ export default {
         }
       }, 1000)
     },
-    fetchUserMappings: function () {
-      getMappings().then((result) => {
-        _map(result.User_Mapping, (item, key) => {
-          this.userMappings.push(item)
-        })
-      })
-    },
-    fetchGroupUsers: function () {
-      getGroupUsers().then((result) => {
-        var target = {}; result.records.forEach(function(key) {
-          var users = {}; key.User.forEach(function(item) {
-            users[item['user_id']] = item['name_zh-hk']
-          })
-          target[key['name_zh-hk']] = users
-        })
-        console.log(target)
-        this.groupUsers = target
-      })
-    },
     focusInput: function () {
       // document.getElementById('autoAttendInput').focus()
     }
@@ -115,15 +93,6 @@ export default {
           this.submitUser(obj)
         }
       }
-
-      // matching first type of pattern [1123123132]
-      // if (/\[\w+\]/.test(val)) {
-      //   this.submitAttendance()
-      // }
-      // // matching second type of pattern XXXXXXXX=
-      // if (/HKSARG|VAC\w+=/.test(val)) {
-      //   this.submitVaccineRecord()
-      // }
     }
   }
 }

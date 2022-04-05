@@ -14,7 +14,6 @@
           <qrcode-scanner
             :qrbox="250"
             :fps="10"
-            style="width: 500px;"
             @result="onScan"
           />
         </div>
@@ -42,7 +41,8 @@ export default {
     return {
       worshipId: '',
       userMappings: [],
-      history: []
+      history: [],
+      groupUsers: {}
     }
   },
   computed: {
@@ -71,12 +71,11 @@ export default {
         if (obj) {
           if (obj.type === 'vaccine_qr' && !obj.found) {
             console.log('handleMissingMapping')
-            obj.userid = this.handleMissingMapping(obj)
+            obj.userid = this.handleMissingMapping(obj, this.groupUsers)
           } else {
             this.submitUser(obj)
           }
         }
-
         this.history.push(decodedText)
       }
     }

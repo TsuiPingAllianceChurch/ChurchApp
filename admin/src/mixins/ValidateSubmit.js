@@ -1,6 +1,9 @@
+/* eslint-disable */
 import { mapGetters, mapActions } from 'vuex'
 import _get from 'lodash/get'
+import _map from 'lodash/map'
 import { format } from 'date-fns'
+import { getMappings, getGroupUsers } from '../../api/user'
 
 export default {
   computed: {
@@ -11,6 +14,25 @@ export default {
     })
   },
   methods: {
+    fetchUserMappings () {
+      getMappings().then((result) => {
+        _map(result.User_Mapping, (item, key) => {
+          this.userMappings.push(item)
+        })
+      })
+    },
+    fetchGroupUsers () {
+      getGroupUsers().then((result) => {
+        var target = {}; result.records.forEach(function(key) {
+          var users = {}; key.User.forEach(function(item) {
+            users[item['user_id']] = item['name_zh-hk']
+          })
+          target[key['name_zh-hk']] = users
+        })
+        console.log(target)
+        this.groupUsers = target
+      })
+    },
     getSweetMessage (userId, worshipId) {
       const validWorship = this.getWorship(worshipId)
       if (validWorship === undefined) {
@@ -50,7 +72,7 @@ export default {
 
         const toast = this.$swal.mixin({
           toast: true,
-          position: 'top-end',
+          position: 'center',
           showConfirmButton: false,
           timer: 5000,
           padding: '2rem'
