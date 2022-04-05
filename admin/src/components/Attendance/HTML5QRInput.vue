@@ -54,6 +54,7 @@ export default {
   mounted: function () {
     this.worshipId = this.getCurrentWorship
     this.fetchUserMappings()
+    this.fetchGroupUsers()
   },
   methods: {
     fetchUserMappings: function () {
