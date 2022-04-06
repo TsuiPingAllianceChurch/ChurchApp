@@ -75,9 +75,9 @@ export default {
             obj.userid = this.handleMissingMapping(obj, this.groupUsers)
           } else {
             this.submitUser(obj)
+            this.history.push(decodedText)
           }
         }
-        this.history.push(decodedText)
       }
     }
   },
