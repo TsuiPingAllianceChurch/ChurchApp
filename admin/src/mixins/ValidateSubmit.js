@@ -89,13 +89,15 @@ export default {
           }
           toast.fire({
             type: message.status,
-            title: `${message.title} - ${message.desc}`
+            title: `${message.title} - ${message.desc}`,
+            timer: 2000
           })
         } catch (e) {
           console.log(e)
           toast.fire({
             type: 'error',
-            title: '點名不成功 - 請輸入正確代碼'
+            title: '點名不成功 - 請輸入正確代碼',
+            timer: 2000
           })
         }
       }

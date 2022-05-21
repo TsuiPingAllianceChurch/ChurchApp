@@ -12,10 +12,10 @@
             <div class="col">
                 <div class="form-group" >
                     <textarea
-                        v-model.lazy="attendanceStr"
+                        v-model="attendanceStr"
                         class="form-control"
                         id="autoAttendInput"
-                        rows="10"></textarea>
+                        rows="2"></textarea>
                 </div>
             </div>
         </div>
@@ -56,7 +56,7 @@ export default {
     this.fetchGroupUsers()
   },
   created: function () {
-    window.addEventListener('keydown', this.appendChar)
+    // window.addEventListener('keydown', this.appendChar)
   },
   methods: {
     appendChar (e) {
