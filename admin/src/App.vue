@@ -54,7 +54,7 @@ export default {
     setInterval(() => {
       // fetchAttendances will only retrieve new data
       self.fetchAttendances()
-    }, 5000)
+    }, 1000)
     setInterval(() => {
       self.fetchAndUpdateCurrentWorship()
     }, 900000) // 15 mins 900000

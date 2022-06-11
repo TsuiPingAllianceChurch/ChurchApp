@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: 'ManualAttend',
+  name: 'AutoAttend',
   components: {
     'attendance-auto': () => import(/* webpackChunkName: "Attendance" */ './Attendance/AutoInput'),
     'attendance-list': () => import(/* webpackChunkName: "Attendance" */ './Attendance/AttendanceList')
