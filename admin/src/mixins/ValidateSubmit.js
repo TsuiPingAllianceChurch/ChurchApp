@@ -74,7 +74,7 @@ export default {
           position: 'center',
           showConfirmButton: false,
           timer: 5000,
-          padding: '2rem'
+          padding: '1rem'
         })
 
         try {
@@ -88,16 +88,22 @@ export default {
             this.postAttendance(data)
           }
           toast.fire({
-            type: message.status,
+            icon: message.status,
             title: `${message.title} - ${message.desc}`,
-            timer: 2000
+            timer: 2000,
+            showConfirmButton: false,
+            timerProgressBar: true,
+            allowEnterKey: false
           })
         } catch (e) {
           console.log(e)
           toast.fire({
-            type: 'error',
+            icon: 'error',
             title: '點名不成功 - 請輸入正確代碼',
-            timer: 2000
+            timer: 2000,
+            showConfirmButton: false,
+            timerProgressBar: true,
+            allowEnterKey: false
           })
         }
       }

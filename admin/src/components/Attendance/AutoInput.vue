@@ -73,10 +73,11 @@ export default {
         } else {
           self.oldAttendanceStr = self.attendanceStr
         }
+        self.focusInput()
       }, 1000)
     },
     focusInput: function () {
-      // document.getElementById('autoAttendInput').focus()
+      document.getElementById('autoAttendInput').focus()
     }
   },
   watch: {
@@ -101,7 +102,7 @@ export default {
 <style>
 
 .swal2-header {
-  font-size: 2rem;
+  font-size: 1.3rem;
 }
 
 </style>
