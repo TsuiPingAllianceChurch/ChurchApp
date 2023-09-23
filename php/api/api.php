@@ -2735,7 +2735,7 @@ class PHP_CRUD_API {
 
 $api = new PHP_CRUD_API(array(
 	'dbengine'=>'MySQL',
-	'hostname'=>'tpac_db',
+	'hostname'=>'127.0.0.1',
 	'username'=>'root',
 	'password'=>'rootpassword',
 	'database'=>'tpac_db',
