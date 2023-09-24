@@ -51,7 +51,7 @@ properties:
     azureFile:
       sharename: tpacfileshare
       storageAccountName: tpacstorageaccount
-      storageAccountKey: Ai84yRYLRiOt4vYeuQvKpo9fCm8F29xP/TcmhYX1U056Gl1Z/C52uTx5D89HmwlyWglOn2g/x+Tf+AStuPue/A==
+      storageAccountKey: xxx
   imageRegistryCredentials:
   - server: tpacacr.azurecr.io
     username: 07434292-f76a-42a7-8c3d-0f1bab89f3c6
