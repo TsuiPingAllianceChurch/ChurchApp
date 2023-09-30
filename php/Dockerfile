@@ -6,3 +6,6 @@ RUN apt-get update \
   && docker-php-ext-install mysqli pdo_pgsql pdo_mysql
 
 COPY api/* /var/www/html/
+
+COPY ports.conf /etc/apache2/ports.conf
+COPY 000-default.conf /etc/apache2/sites-enabled/000-default.conf

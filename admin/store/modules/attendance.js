@@ -21,11 +21,14 @@ export default {
         })
       })
     },
-    postAttendance: ({commit}, data) => {
+    postAttendance: ({commit, getters}, data) => {
       //console.log('postAttendance', data)
+      const maxAttendenceId = getters.getMaxAttendanceId
       return new Promise((resolve, reject) => {
         return postAttendances(data).then((result) => {
           if (result >= 0) {
+            data["attendance_id"] = result
+            commit('setAttendances', {key: result, item: data})
             return resolve(true)
           }
           return false

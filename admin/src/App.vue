@@ -50,11 +50,12 @@ export default {
     this.fetchAndUpdateCurrentWorship()
     this.fetchGroups()
     this.fetchMembers()
+    this.fetchAttendances()
     const self = this
-    setInterval(() => {
-      // fetchAttendances will only retrieve new data
-      self.fetchAttendances()
-    }, 1000)
+    // setInterval(() => {
+    //   // fetchAttendances will only retrieve new data
+    //   self.fetchAttendances()
+    // }, 10000)
     setInterval(() => {
       self.fetchAndUpdateCurrentWorship()
     }, 900000) // 15 mins 900000

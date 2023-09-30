@@ -1,0 +1,9 @@
+tpacchurchapp.eastasia.azurecontainer.io {
+    handle /api* {
+      reverse_proxy http://localhost:8001
+    }
+
+    handle {
+      reverse_proxy http://localhost:8080
+    }
+}
