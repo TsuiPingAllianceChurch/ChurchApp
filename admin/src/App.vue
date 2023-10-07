@@ -31,6 +31,7 @@ export default {
         } else {
           this.updateCurrentWorship()
         }
+        this.fetchAttendances(this.getCurrentWorship)
       })
     },
     ...mapActions({
@@ -50,7 +51,6 @@ export default {
     this.fetchAndUpdateCurrentWorship()
     this.fetchGroups()
     this.fetchMembers()
-    this.fetchAttendances()
     const self = this
     // setInterval(() => {
     //   // fetchAttendances will only retrieve new data

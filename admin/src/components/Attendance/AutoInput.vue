@@ -53,7 +53,7 @@ export default {
     this.focusInput()
     this.clearInvalidInput()
     this.fetchUserMappings()
-    this.fetchGroupUsers()
+    // this.fetchGroupUsers()
   },
   created: function () {
     // window.addEventListener('keydown', this.appendChar)

@@ -7,13 +7,13 @@ import { getAttendances, postAttendances, deleteAttendance } from '../../api/att
 export default {
   state: {},
   actions: {
-    fetchAttendances: ({commit, getters}) => {
-      const maxAttendenceId = getters.getMaxAttendanceId
+    fetchAttendances: ({commit, getters}, worshipId) => {
+      //const maxAttendenceId = getters.getMaxAttendanceId
       //console.warn('current max attendence id', maxAttendenceId)
       return new Promise((resolve, reject) => {
-        return getAttendances(maxAttendenceId).then((result) => {
-          _map(result.Attendance, (item, key) => {
-            commit('setAttendances', {key: (key + maxAttendenceId), item})
+        return getAttendances(worshipId).then((result) => {
+          _map(result.AttendanceRecord, (item, key) => {
+            commit('setAttendances', {key: item.attendance_id, item})
           })
           return resolve(result)
         }).catch((err) => {
@@ -23,7 +23,7 @@ export default {
     },
     postAttendance: ({commit, getters}, data) => {
       //console.log('postAttendance', data)
-      const maxAttendenceId = getters.getMaxAttendanceId
+      //const maxAttendenceId = getters.getMaxAttendanceId
       return new Promise((resolve, reject) => {
         return postAttendances(data).then((result) => {
           if (result >= 0) {

@@ -11999,7 +11999,7 @@ namespace Tqdev\PhpCrudApi {
 
     $config = new Config([
         'driver' => 'mysql',
-        'address' => 'tpac_db',
+        'address' => '127.0.0.1',
         'port' => '3306',
         'username' => 'root',
         'password' => 'rootpassword',
